@@ -1,0 +1,899 @@
+player	team	league	position	salary
+Ahmed, Nick	Arizona Diamondbacks	NL-West	SS	8125000
+Bumgarner, Madison	Arizona Diamondbacks	NL-West	SP	17882892
+Cabrera, Asdrubal	Arizona Diamondbacks	NL-West	2B	1750000
+Calhoun, Kole	Arizona Diamondbacks	NL-West	OF	8000000
+Clarke, Taylor	Arizona Diamondbacks	NL-West	SP	601800
+Clippard, Tyler	Arizona Diamondbacks	NL-West	RP	1750000
+Crichton, Stefan	Arizona Diamondbacks	NL-West	RP	596400
+Devenski, Chris	Arizona Diamondbacks	NL-West	RP	1000000
+Escobar, Eduardo	Arizona Diamondbacks	NL-West	3B	7666667
+Gallen, Zac	Arizona Diamondbacks	NL-West	SP	607500
+Ginkel, Kevin	Arizona Diamondbacks	NL-West	RP	585900
+Kelly, Carson	Arizona Diamondbacks	NL-West	C	1700000
+Kelly, Merrill	Arizona Diamondbacks	NL-West	SP	4250000
+Locastro, Tim	Arizona Diamondbacks	NL-West	OF	589100
+Lopez, Yoan	Arizona Diamondbacks	NL-West	RP	597800
+Marte, Ketel	Arizona Diamondbacks	NL-West	OF	6400000
+Mathisen, Wyatt	Arizona Diamondbacks	NL-West	INF	573600
+Peralta, David	Arizona Diamondbacks	NL-West	OF	8000000
+Rojas, Josh	Arizona Diamondbacks	NL-West	2B	582400
+Smith, Caleb	Arizona Diamondbacks	NL-West	SP	1465000
+Smith, Pavin	Arizona Diamondbacks	NL-West	OF	574600
+Smith, Riley	Arizona Diamondbacks	NL-West	RP	582300
+Soria, Joakim	Arizona Diamondbacks	NL-West	RP	3500000
+VanMeter, Josh	Arizona Diamondbacks	NL-West	INF	586600
+Vogt, Stephen	Arizona Diamondbacks	NL-West	C	3500000
+Walker, Christian	Arizona Diamondbacks	NL-West	1B	619300
+Weaver, Luke	Arizona Diamondbacks	NL-West	SP	1950000
+Widener, Taylor	Arizona Diamondbacks	NL-West	RP	583400
+Young, Alex	Arizona Diamondbacks	NL-West	RP	603000
+Acuna Jr., Ronald	Atlanta Braves	NL-East	OF	5000000
+Adrianza, Ehire	Atlanta Braves	NL-East	SS	1500000
+Albies, Ozzie	Atlanta Braves	NL-East	2B	3000000
+Anderson, Ian	Atlanta Braves	NL-East	SP	575500
+d'Arnaud, Travis	Atlanta Braves	NL-East	C	8000000
+Dayton, Grant	Atlanta Braves	NL-East	RP	900000
+Freeman, Freddie	Atlanta Braves	NL-East	1B	22359375
+Fried, Max	Atlanta Braves	NL-East	SP	3500000
+Inciarte, Ender	Atlanta Braves	NL-East	OF	8700000
+Jackson, Alex	Atlanta Braves	NL-East	C	580500
+Jackson, Luke	Atlanta Braves	NL-East	RP	1900000
+Jones, Nate	Atlanta Braves	NL-East	RP	1500000
+Martin, Chris	Atlanta Braves	NL-East	RP	7000000
+Matzek, Tyler	Atlanta Braves	NL-East	RP	600500
+Minter, A.J.	Atlanta Braves	NL-East	RP	1300000
+Morton, Charlie	Atlanta Braves	NL-East	SP	15000000
+Newcomb, Sean	Atlanta Braves	NL-East	SP	600500
+Ozuna, Marcell	Atlanta Braves	NL-East	OF	12000000
+Pache, Cristian	Atlanta Braves	NL-East	OF	580500
+Riley, Austin	Atlanta Braves	NL-East	3B	590500
+Sandoval, Pablo	Atlanta Braves	NL-East	3B	1000000
+Smith, Will	Atlanta Braves	NL-East	RP	13000000
+Smyly, Drew	Atlanta Braves	NL-East	SP	11000000
+Soroka, Mike	Atlanta Braves	NL-East	SP	2800000
+Swanson, Dansby	Atlanta Braves	NL-East	SS	6000000
+Tomlin, Josh	Atlanta Braves	NL-East	SP	1000000
+Toussaint, Touki	Atlanta Braves	NL-East	RP	590500
+Ynoa, Huascar	Atlanta Braves	NL-East	RP	580500
+Armstrong, Shawn	Baltimore Orioles	AL-East	RP	825000
+Davis, Chris	Baltimore Orioles	AL-East	1B	21005301
+Franco, Maikel	Baltimore Orioles	AL-East	3B	800000
+Fry, Paul	Baltimore Orioles	AL-East	RP	581000
+Galvis, Freddy	Baltimore Orioles	AL-East	SS	1500000
+Harvey, Hunter	Baltimore Orioles	AL-East	RP	574000
+Harvey, Matt	Baltimore Orioles	AL-East	SP	1000000
+Hays, Austin	Baltimore Orioles	AL-East	OF	578500
+Kremer, Dean	Baltimore Orioles	AL-East	SP	572500
+LeBlanc, Wade	Baltimore Orioles	AL-East	SP	700000
+Lopez, Jorge	Baltimore Orioles	AL-East	SP	586750
+Mancini, Trey	Baltimore Orioles	AL-East	1B	4750000
+Means, John	Baltimore Orioles	AL-East	SP	593500
+Mountcastle, Ryan	Baltimore Orioles	AL-East	1B	574500
+Mullins, Cedric	Baltimore Orioles	AL-East	OF	577000
+Plutko, Adam	Baltimore Orioles	AL-East	RP	584200
+Riuz, Rio	Baltimore Orioles	AL-East	3B	583500
+Santander, Anthony	Baltimore Orioles	AL-East	OF	2100000
+Sceroler, Mac	Baltimore Orioles	AL-East	RP	570500
+Scott, Tanner	Baltimore Orioles	AL-East	RP	580000
+Severino, Pedro	Baltimore Orioles	AL-East	C	1825000
+Sisco, Chance	Baltimore Orioles	AL-East	C	580500
+Stewart, DJ	Baltimore Orioles	AL-East	OF	577000
+Sulser, Cole	Baltimore Orioles	AL-East	RP	574500
+Tate, Dillon	Baltimore Orioles	AL-East	RP	574500
+Urias, Ramon	Baltimore Orioles	AL-East	2B	571500
+Valaika, Pat	Baltimore Orioles	AL-East	2B	875000
+Valdez, Cesar	Baltimore Orioles	AL-East	RP	576500
+Wells, Tyler	Baltimore Orioles	AL-East	RP	570500
+Zimmermann, Bruce	Baltimore Orioles	AL-East	SP	571500
+Andriese, Matt	Boston Red Sox	AL-East	RP	1850000
+Arroyo, Christian	Boston Red Sox	AL-East	3B	581500
+Barnes, Matt	Boston Red Sox	AL-East	RP	4500000
+Bogaerts, Xander	Boston Red Sox	AL-East	SS	20000000
+Brasier, Ryan	Boston Red Sox	AL-East	RP	1250000
+Brice, Austin	Boston Red Sox	AL-East	RP	870000
+Cordero, Franchy	Boston Red Sox	AL-East	OF	800000
+Dalbec, Bobby	Boston Red Sox	AL-East	1B	575000
+Devers, Rafael	Boston Red Sox	AL-East	3B	4575000
+Eovaldi, Nathan	Boston Red Sox	AL-East	SP	17000000
+Gonzalez, Marwin	Boston Red Sox	AL-East	OF	3000000
+Hernandez, Darwinzon	Boston Red Sox	AL-East	RP	578500
+Hernandez, Kike	Boston Red Sox	AL-East	2B	5596590
+Houck, Tanner	Boston Red Sox	AL-East	SP	577000
+Martinez, J.D.	Boston Red Sox	AL-East	DH	19375000
+Ottavino, Adam	Boston Red Sox	AL-East	RP	8000000
+Perez, Martin	Boston Red Sox	AL-East	SP	4500000
+Pivetta, Nick	Boston Red Sox	AL-East	SP	613500
+Plawecki, Kevin	Boston Red Sox	AL-East	C	1600000
+Renfroe, Hunter	Boston Red Sox	AL-East	OF	3100000
+Richards, Garrett	Boston Red Sox	AL-East	SP	8500000
+Rodriguez, Eduardo	Boston Red Sox	AL-East	SP	8300000
+Sale, Chris	Boston Red Sox	AL-East	SP	24172484
+Sawamura, Hirokazu	Boston Red Sox	AL-East	RP	1200000
+Taylor, Josh	Boston Red Sox	AL-East	RP	580500
+Valdez, Phillips	Boston Red Sox	AL-East	RP	578500
+Vazquez, Christian	Boston Red Sox	AL-East	C	6250000
+Verdugo, Alex	Boston Red Sox	AL-East	OF	649500
+Whitlock, Garrett	Boston Red Sox	AL-East	RP	570500
+Adam, Jason	Chicago Cubs	NL-Central	RP	592500
+Alzolay, Adbert	Chicago Cubs	NL-Central	SP	573000
+Arrieta, Jake	Chicago Cubs	NL-Central	SP	4000000
+Baez, Javier	Chicago Cubs	NL-Central	SS	11650000
+Bote, David	Chicago Cubs	NL-Central	2B	1010000
+Brothers, Rex	Chicago Cubs	NL-Central	RP	850000
+Bryant, Kris	Chicago Cubs	NL-Central	3B	19500000
+Chafin, Andrew	Chicago Cubs	NL-Central	RP	2250000
+Contreras, Willson	Chicago Cubs	NL-Central	C	6650000
+Davies, Zach	Chicago Cubs	NL-Central	SP	8630000
+Duffy, Matt	Chicago Cubs	NL-Central	3B	1000000
+Happ, Ian	Chicago Cubs	NL-Central	OF	4100000
+Hendricks, Kyle	Chicago Cubs	NL-Central	SP	14000000
+Heyward, Jason	Chicago Cubs	NL-Central	OF	21000000
+Holder, Jonathan	Chicago Cubs	NL-Central	RP	750000
+Kimbrel, Craig	Chicago Cubs	NL-Central	RP	16000000
+Maples, Dillon	Chicago Cubs	NL-Central		576500
+Marisnick, Jake	Chicago Cubs	NL-Central	OF	1000000
+Mills, Alec	Chicago Cubs	NL-Central	SP	600000
+Pederson, Joc	Chicago Cubs	NL-Central	OF	4500000
+Rizzo, Anthony	Chicago Cubs	NL-Central	1B	16500000
+Romine, Austin	Chicago Cubs	NL-Central	C	1500000
+Sogard, Eric	Chicago Cubs	NL-Central	2B	1000000
+Tepera, Ryan	Chicago Cubs	NL-Central	RP	800000
+Wick, Rowan	Chicago Cubs	NL-Central	RP	593000
+Williams, Trevor	Chicago Cubs	NL-Central	SP	2500000
+Winkler, Dan	Chicago Cubs	NL-Central	RP	900000
+Wolters, Tony	Chicago Cubs	NL-Central	C	800000
+Workman, Brandon	Chicago Cubs	NL-Central	RP	1000000
+Abreu, Jose	Chicago White Sox	AL-Central	1B	17666667
+Anderson, Tim	Chicago White Sox	AL-Central	SS	7250000
+Bummer, Aaron	Chicago White Sox	AL-Central	RP	2000000
+Cease, Dylan	Chicago White Sox	AL-Central	SP	600000
+Collins, Zack	Chicago White Sox	AL-Central	C	575000
+Crochet, Garrett	Chicago White Sox	AL-Central	RP	572000
+Eaton, Adam	Chicago White Sox	AL-Central	OF	7000000
+Engel, Adam	Chicago White Sox	AL-Central	OF	1375000
+Foster, Matt	Chicago White Sox	AL-Central	RP	585000
+Fry, Jace	Chicago White Sox	AL-Central	RP	862500
+Garcia, Leury	Chicago White Sox	AL-Central	OF	3500000
+Giolito, Lucas	Chicago White Sox	AL-Central	SP	4150000
+Grandal, Yasmani	Chicago White Sox	AL-Central	C	18250000
+Hamilton, Billy	Chicago White Sox	AL-Central	OF	1000000
+Hendriks, Liam	Chicago White Sox	AL-Central	RP	11333333
+Heuer, Codi	Chicago White Sox	AL-Central	RP	585000
+Jimenez, Eloy	Chicago White Sox	AL-Central	OF	4333333
+Keuchel, Dallas	Chicago White Sox	AL-Central	SP	18000000
+Kopech, Michael	Chicago White Sox	AL-Central	RP	570500
+Lamb, Jake	Chicago White Sox	AL-Central	3B	1000000
+Lynn, Lance	Chicago White Sox	AL-Central	SP	8000000
+Madrigal, Nick	Chicago White Sox	AL-Central	2B	584000
+Marshall, Evan	Chicago White Sox	AL-Central	RP	2000000
+Mercedes, Yermin	Chicago White Sox	AL-Central	C	570500
+Moncada, Yoan	Chicago White Sox	AL-Central	3B	6800000
+Robert, Luis	Chicago White Sox	AL-Central	OF	3500000
+Rodon, Carlos	Chicago White Sox	AL-Central	SP	3000000
+Ruiz, Jose	Chicago White Sox	AL-Central	RP	575000
+Vaughn, Andrew	Chicago White Sox	AL-Central	OF	570500
+Akiyama, Shogo	Cincinnati Reds	NL-Central	OF	7000000
+Antone, Tejay	Cincinnati Reds	NL-Central	RP	580500
+Aquino, Aristides	Cincinnati Reds	NL-Central	OF	579000
+Barnhart, Tucker	Cincinnati Reds	NL-Central	C	4437500
+Bedrosian, Cam	Cincinnati Reds	NL-Central	RP	1500000
+Blandino, Alex	Cincinnati Reds	NL-Central	INF	573000
+Castellanos, Nick	Cincinnati Reds	NL-Central	OF	14000000
+Castillo, Luis	Cincinnati Reds	NL-Central	SP	4200000
+De Leon, Jose	Cincinnati Reds	NL-Central	SP	573500
+Doolittle, Sean	Cincinnati Reds	NL-Central	RP	1500000
+Farmer, Kyle	Cincinnati Reds	NL-Central	2B	640000
+Fulmer, Carson	Cincinnati Reds	NL-Central	RP	587500
+Garrett, Amir	Cincinnati Reds	NL-Central	RP	1500000
+Gray, Sonny	Cincinnati Reds	NL-Central	SP	10825000
+Hoffman, Jeff	Cincinnati Reds	NL-Central	SP	585500
+India, Jonathan	Cincinnati Reds	NL-Central	2B	570500
+Lorenzen, Michael	Cincinnati Reds	NL-Central	SP	4437500
+Mahle, Tyler	Cincinnati Reds	NL-Central	SP	2200000
+Miley, Wade	Cincinnati Reds	NL-Central	SP	8000000
+Moustakas, Mike	Cincinnati Reds	NL-Central	3B	14000000
+Naquin, Tyler	Cincinnati Reds	NL-Central	OF	1500000
+Perez, Cionel	Cincinnati Reds	NL-Central	RP	572500
+Romano, Sal	Cincinnati Reds	NL-Central	RP	583500
+Senzel, Nick	Cincinnati Reds	NL-Central	OF	580500
+Sims, Lucas	Cincinnati Reds	NL-Central	RP	598500
+Stephenson, Tyler	Cincinnati Reds	NL-Central	C	570500
+Suarez, Eugenio	Cincinnati Reds	NL-Central	SS	10785714
+Votto, Joey	Cincinnati Reds	NL-Central	1B	25000000
+Winker, Jesse	Cincinnati Reds	NL-Central	OF	3150000
+Allen, Logan	Cleveland Guardians	AL-Central	RP	571500
+Bauers, Jake	Cleveland Guardians	AL-Central	1B	584400
+Bieber, Shane	Cleveland Guardians	AL-Central	SP	679900
+Chang, Yu	Cleveland Guardians	AL-Central	INF	571100
+Civale, Aaron	Cleveland Guardians	AL-Central	SP	587400
+Clase, Emmanuel	Cleveland Guardians	AL-Central	RP	571800
+Gamel, Ben	Cleveland Guardians	AL-Central	OF	1500000
+Gimenez, Andres	Cleveland Guardians	AL-Central	SS	577100
+Hedges, Austin	Cleveland Guardians	AL-Central	C	3280000
+Hernandez, Cesar	Cleveland Guardians	AL-Central	2B	5000000
+Hill, Cam	Cleveland Guardians	AL-Central	RP	577500
+Karinchak, James	Cleveland Guardians	AL-Central	RP	585000
+Luplow, Jordan	Cleveland Guardians	AL-Central	OF	581500
+Maton, Phil	Cleveland Guardians	AL-Central	RP	975000
+McKenzie, Triston	Cleveland Guardians	AL-Central	SP	575300
+Naylor, Josh	Cleveland Guardians	AL-Central	OF	577500
+Perez, Oliver	Cleveland Guardians	AL-Central	RP	1250000
+Perez, Roberto	Cleveland Guardians	AL-Central	C	5750000
+Plesac, Zach	Cleveland Guardians	AL-Central	SP	590200
+Quantrill, Cal	Cleveland Guardians	AL-Central	SP	586200
+Ramirez, Jose	Cleveland Guardians	AL-Central	3B	9400000
+Reyes, Franmil	Cleveland Guardians	AL-Central	DH	602400
+Rosario, Amed	Cleveland Guardians	AL-Central	OF	2400000
+Rosario, Eddie	Cleveland Guardians	AL-Central	OF	8000000
+Shaw, Bryan	Cleveland Guardians	AL-Central	RP	1000000
+Stephan, Trevor	Cleveland Guardians	AL-Central	RP	570500
+Wittgren, Nick	Cleveland Guardians	AL-Central	RP	2000000
+Almonte, Yency	Colorado Rockies	NL-West	RP	575500
+Bard, Daniel	Colorado Rockies	NL-West	RP	2925000
+Blackmon, Charlie	Colorado Rockies	NL-West	OF	21000000
+Bowden, Ben	Colorado Rockies	NL-West	RP	570500
+Chacin, Jhoulys	Colorado Rockies	NL-West	RP	800000
+Cron, C.J.	Colorado Rockies	NL-West	1B	1000000
+Daza, Yonathan	Colorado Rockies	NL-West	OF	572500
+Diaz, Elias	Colorado Rockies	NL-West	C	1200000
+Estevez, Carlos	Colorado Rockies	NL-West	RP	1450000
+Freeland, Kyle	Colorado Rockies	NL-West	SP	5025000
+Fuentes, Josh	Colorado Rockies	NL-West	1B	575500
+Givens, Mychal	Colorado Rockies	NL-West	RP	4050000
+Gomber, Austin	Colorado Rockies	NL-West	SP	575500
+Gonzalez, Chi Chi	Colorado Rockies	NL-West	RP	1100000
+Gray, Jon	Colorado Rockies	NL-West	SP	6000000
+Hampson, Garrett	Colorado Rockies	NL-West	2B	580500
+Hilliard, Sam	Colorado Rockies	NL-West	OF	575500
+Kinley, Tyler	Colorado Rockies	NL-West	RP	580500
+Lambert, Peter	Colorado Rockies	NL-West	RP	575500
+Marquez, German	Colorado Rockies	NL-West	SP	7800000
+McMahon, Ryan	Colorado Rockies	NL-West	2B	2375000
+Nunez, Dom	Colorado Rockies	NL-West	C	572500
+Oberg, Scott	Colorado Rockies	NL-West	RP	4000000
+Owings, Chris	Colorado Rockies	NL-West	2B	1000000
+Rodgers, Brendan	Colorado Rockies	NL-West	2B	575500
+Senzatela, Antonio	Colorado Rockies	NL-West	SP	3000000
+Sheffield, Jordan	Colorado Rockies	NL-West	RP	570500
+Stephenson, Robert	Colorado Rockies	NL-West	RP	805000
+Story, Trevor	Colorado Rockies	NL-West	SS	18500000
+Tapia, Raimel	Colorado Rockies	NL-West	OF	1950000
+Alexander, Tyler	Detroit Tigers	AL-Central	RP	578800
+Baddoo, Akil	Detroit Tigers	AL-Central	OF	570500
+Boyd, Matt	Detroit Tigers	AL-Central	SP	6500000
+Cabrera, Miguel	Detroit Tigers	AL-Central	1B	30000000
+Candelario, Jeimer	Detroit Tigers	AL-Central	3B	2850000
+Castro, Harold	Detroit Tigers	AL-Central	INF	581700
+Castro, Willi	Detroit Tigers	AL-Central	SS	578500
+Cisnero, Jose	Detroit Tigers	AL-Central	RP	970000
+Farmer, Buck	Detroit Tigers	AL-Central	RP	1850000
+Fulmer, Michael	Detroit Tigers	AL-Central	RP	3100000
+Garcia, Bryan	Detroit Tigers	AL-Central	RP	576600
+Garcia, Rony	Detroit Tigers	AL-Central	RP	575000
+Goodrum, Niko	Detroit Tigers	AL-Central	SS	2100000
+Greiner, Grayson	Detroit Tigers	AL-Central	C	583100
+Grossman, Robbie	Detroit Tigers	AL-Central	OF	5000000
+Holland, Derek	Detroit Tigers	AL-Central	RP	925000
+Jones, JaCoby	Detroit Tigers	AL-Central	OF	2650000
+Mazara, Nomar	Detroit Tigers	AL-Central	OF	1750000
+Mize, Casey	Detroit Tigers	AL-Central	SP	574100
+Norris, Daniel	Detroit Tigers	AL-Central	RP	3475000
+Ramos, Wilson	Detroit Tigers	AL-Central	C	2000000
+Reyes, Victor	Detroit Tigers	AL-Central	OF	587100
+Schoop, Jonathan	Detroit Tigers	AL-Central	2B	4500000
+Skubal, Tarik	Detroit Tigers	AL-Central	SP	574300
+Soto, Gregory	Detroit Tigers	AL-Central	RP	579600
+Teheran, Julio	Detroit Tigers	AL-Central	SP	3000000
+Turnbull, Spencer	Detroit Tigers	AL-Central	SP	586900
+Urena, Jose	Detroit Tigers	AL-Central	SP	3250000
+Abreu, Bryan	Houston Astros	AL-West	RP	574100
+Altuve, Jose	Houston Astros	AL-West	2B	29000000
+Alvarez, Yordan	Houston Astros	AL-West	DH	609000
+Baez, Pedro	Houston Astros	AL-West	RP	4750000
+Bielak, Brandon	Houston Astros	AL-West	SP	599000
+Brantley, Michael	Houston Astros	AL-West	OF	16000000
+Bregman, Alex	Houston Astros	AL-West	3B	13000000
+Castro, Jason	Houston Astros	AL-West	C	3500000
+Correa, Carlos	Houston Astros	AL-West	SS	11700000
+Diaz, Aledmys	Houston Astros	AL-West	SS	3000000
+Garcia, Luis	Houston Astros	AL-West	RP	580100
+Garcia, Robel	Houston Astros	AL-West	INF	580500
+Greinke, Zack	Houston Astros	AL-West	SP	29921850
+Gurriel, Yuli	Houston Astros	AL-West	1B	6500000
+James, Josh	Houston Astros	AL-West	SP	602000
+Javier, Cristian	Houston Astros	AL-West	SP	620400
+Maldonado, Martin	Houston Astros	AL-West	C	3500000
+Martes, Francis	Houston Astros	AL-West	RP	570500
+McCormick, Chas	Houston Astros	AL-West	OF	570500
+McCullers Jr., Lance	Houston Astros	AL-West	SP	6500000
+Paredes, Enoli	Houston Astros	AL-West	RP	596900
+Pressly, Ryan	Houston Astros	AL-West	RP	8750000
+Pruitt, Austin	Houston Astros	AL-West	RP	617500
+Raley, Brooks	Houston Astros	AL-West	RP	2000000
+Scrubb, Andre	Houston Astros	AL-West	RP	601600
+Smith, Joe	Houston Astros	AL-West	RP	4000000
+Stanek, Ryne	Houston Astros	AL-West	RP	1100000
+Straw, Myles	Houston Astros	AL-West	OF	590400
+Taylor, Blake	Houston Astros	AL-West	RP	599100
+Tucker, Kyle	Houston Astros	AL-West	OF	624300
+Urquidy, Jose	Houston Astros	AL-West	SP	604200
+Valdez, Framber	Houston Astros	AL-West	SP	637300
+Verlander, Justin	Houston Astros	AL-West	SP	33000000
+Alberto, Hanser	Kansas City Royals	AL-Central	2B	1650000
+Barlow, Scott	Kansas City Royals	AL-Central	RP	650000
+Benintendi, Andrew	Kansas City Royals	AL-Central	OF	6600000
+Brentz, Jake	Kansas City Royals	AL-Central	RP	570500
+Davis, Wade	Kansas City Royals	AL-Central	RP	1250000
+Dozier, Hunter	Kansas City Royals	AL-Central	3B	2720000
+Duffy, Danny	Kansas City Royals	AL-Central	SP	15500000
+Dyson, Jarrod	Kansas City Royals	AL-Central	OF	1500000
+Gallagher, Cam	Kansas City Royals	AL-Central	C	604000
+Hahn, Jesse	Kansas City Royals	AL-Central	RP	1750000
+Hernandez, Carlos	Kansas City Royals	AL-Central	RP	574200
+Holland, Greg	Kansas City Royals	AL-Central	RP	2750000
+Isbel, Kyle	Kansas City Royals	AL-Central	OF	570500
+Junis, Jakob	Kansas City Royals	AL-Central	RP	1700000
+Keller, Brad	Kansas City Royals	AL-Central	SP	3350000
+Lopez, Nicky	Kansas City Royals	AL-Central	SS	597500
+McBroom, Ryan	Kansas City Royals	AL-Central	OF	583900
+Merrifield, Whit	Kansas City Royals	AL-Central	OF	7250000
+Minor, Mike	Kansas City Royals	AL-Central	SP	7000000
+Mondesi, Adalberto	Kansas City Royals	AL-Central	SS	2525000
+Perez, Salvador	Kansas City Royals	AL-Central	C	14200000
+Santana, Carlos	Kansas City Royals	AL-Central	1B	7000000
+Singer, Brady	Kansas City Royals	AL-Central	SP	593700
+Soler, Jorge	Kansas City Royals	AL-Central	DH	8050000
+Staumont, Josh	Kansas City Royals	AL-Central	RP	588700
+Taylor, Michael A.	Kansas City Royals	AL-Central	OF	1750000
+Zimmer, Kyle	Kansas City Royals	AL-Central	RP	588700
+Barreto, Franklin	Los Angeles Angels	AL-West	INF	600500
+Bundy, Dylan	Los Angeles Angels	AL-West	SP	8325000
+Canning, Griffin	Los Angeles Angels	AL-West	SP	590500
+Cishek, Steve	Los Angeles Angels	AL-West	RP	1000000
+Claudio, Alex	Los Angeles Angels	AL-West	RP	1125000
+Cobb, Alex	Los Angeles Angels	AL-West	SP	11783080
+Fletcher, David	Los Angeles Angels	AL-West	2B	2000000
+Fowler, Dexter	Los Angeles Angels	AL-West	OF	14500000
+Guerra, Junior	Los Angeles Angels	AL-West	RP	750000
+Heaney, Andrew	Los Angeles Angels	AL-West	SP	6750000
+Iglesias, Jose	Los Angeles Angels	AL-West	SS	3500000
+Iglesias, Raisel	Los Angeles Angels	AL-West	RP	9125000
+Lagares, Juan	Los Angeles Angels	AL-West	OF	1250000
+Mayers, Mike	Los Angeles Angels	AL-West	RP	1200000
+Ohtani, Shohei	Los Angeles Angels	AL-West	DH/SP	3000000
+Pena, Felix	Los Angeles Angels	AL-West	RP	1100000
+Pujols, Albert	Los Angeles Angels	AL-West	1B	30000000
+Quintana, Jose	Los Angeles Angels	AL-West	SP	8000000
+Rendon, Anthony	Los Angeles Angels	AL-West	3B	28071429
+Rodriguez, Chris	Los Angeles Angels	AL-West	RP	570500
+Rojas, Jose	Los Angeles Angels	AL-West	3B	570500
+Slegers, Aaron	Los Angeles Angels	AL-West	RP	590500
+Stassi, Max	Los Angeles Angels	AL-West	C	1600000
+Suzuki, Kurt	Los Angeles Angels	AL-West	C	1500000
+Trout, Mike	Los Angeles Angels	AL-West	OF	37116667
+Upton, Justin	Los Angeles Angels	AL-West	OF	24700000
+Walsh, Jared	Los Angeles Angels	AL-West	1B	590500
+Watson, Tony	Los Angeles Angels	AL-West	RP	1000000
+Alexander, Scott	Los Angeles Dodgers	NL-West	RP	1000000
+Barnes, Austin	Los Angeles Dodgers	NL-West	C	1650000
+Bauer, Trevor	Los Angeles Dodgers	NL-West	SP	31333333
+Beaty, Matt	Los Angeles Dodgers	NL-West	1B	590500
+Bellinger, Cody	Los Angeles Dodgers	NL-West	OF	16100000
+Betts, Mookie	Los Angeles Dodgers	NL-West	OF	18658692
+Buehler, Walker	Los Angeles Dodgers	NL-West	SP	3750000
+Ferguson, Caleb	Los Angeles Dodgers	NL-West	RP	600500
+Gonsolin, Tony	Los Angeles Dodgers	NL-West	SP	580500
+Gonzalez, Victor	Los Angeles Dodgers	NL-West	RP	580500
+Graterol, Brusdar	Los Angeles Dodgers	NL-West	RP	590500
+Jansen, Kenley	Los Angeles Dodgers	NL-West	RP	20000000
+Kahnle, Tommy	Los Angeles Dodgers	NL-West	RP	1025000
+Kelly, Joe	Los Angeles Dodgers	NL-West	RP	8833333
+Kershaw, Clayton	Los Angeles Dodgers	NL-West	SP	31000001
+Knebel, Corey	Los Angeles Dodgers	NL-West	RP	5250000
+Lux, Gavin	Los Angeles Dodgers	NL-West	2B	580500
+May, Dustin	Los Angeles Dodgers	NL-West	SP	590500
+McKinstry, Zach	Los Angeles Dodgers	NL-West	2B	573000
+Muncy, Max	Los Angeles Dodgers	NL-West	1B	9000000
+Nelson, Jimmy	Los Angeles Dodgers	NL-West	RP	1250000
+Pollock, A.J.	Los Angeles Dodgers	NL-West	OF	18000000
+Price, David	Los Angeles Dodgers	NL-West	RP	32000000
+Rios, Edwin	Los Angeles Dodgers	NL-West	3B	590500
+Seager, Corey	Los Angeles Dodgers	NL-West	SS	13750000
+Smith, Will	Los Angeles Dodgers	NL-West	C	590500
+Taylor, Chris	Los Angeles Dodgers	NL-West	2B	7800000
+Toles, Andrew	Los Angeles Dodgers	NL-West	OF	583500
+Treinen, Blake	Los Angeles Dodgers	NL-West	RP	8000000
+Turner, Justin	Los Angeles Dodgers	NL-West	3B	11574377
+Urias, Julio	Los Angeles Dodgers	NL-West	SP	3600000
+Aguilar, Jesus	Miami Marlins	NL-East	1B	4350000
+Alcantara, Sandy	Miami Marlins	NL-East	SP	630000
+Alfaro, Jorge	Miami Marlins	NL-East	C	2050000
+Anderson, Brian	Miami Marlins	NL-East	3B	3800000
+Bass, Anthony	Miami Marlins	NL-East	RP	1000000
+Berti, Jon	Miami Marlins	NL-East	2B	607500
+Bleier, Richard	Miami Marlins	NL-East	RP	1425000
+Brigham, Jeff	Miami Marlins	NL-East	RP	570750
+Brinson, Lewis	Miami Marlins	NL-East	OF	587500
+Campbell, Paul	Miami Marlins	NL-East	RP	570500
+Chisholm, Jazz	Miami Marlins	NL-East	2B	571750
+Cimber, Adam	Miami Marlins	NL-East	RP	925000
+Cooper, Garrett	Miami Marlins	NL-East	1B	1800000
+Curtiss, John	Miami Marlins	NL-East	RP	615000
+Detwiler, Ross	Miami Marlins	NL-East	RP	850000
+Dickerson, Corey	Miami Marlins	NL-East	OF	9500000
+Duvall, Adam	Miami Marlins	NL-East	OF	2000000
+Floro, Dylan	Miami Marlins	NL-East	RP	975000
+Garcia, Yimi	Miami Marlins	NL-East	RP	1900000
+Guzman, Jorge	Miami Marlins	NL-East	RP	570750
+Hernandez, Elieser	Miami Marlins	NL-East	SP	579000
+Lopez, Pablo	Miami Marlins	NL-East	SP	595000
+Marte, Starling	Miami Marlins	NL-East	OF	12500000
+Pop, Zach	Miami Marlins	NL-East	RP	570500
+Rogers, Trevor	Miami Marlins	NL-East	SP	574750
+Rojas, Miguel	Miami Marlins	NL-East	SS	5000000
+Sanchez, Jesus	Miami Marlins	NL-East	OF	571000
+Sierra, Magneuris	Miami Marlins	NL-East	OF	571375
+Wallach, Chad	Miami Marlins	NL-East	C	571375
+Anderson, Brett	Milwaukee Brewers	NL-Central	SP	2500000
+Arcia, Orlando	Milwaukee Brewers	NL-Central	SS	2000000
+Bradley Jr., Jackie	Milwaukee Brewers	NL-Central	OF	13000000
+Burnes, Corbin	Milwaukee Brewers	NL-Central	SP	608000
+Cain, Lorenzo	Milwaukee Brewers	NL-Central	OF	16801121
+Feyereisen, J.P.	Milwaukee Brewers	NL-Central	RP	572400
+Fisher, Derek	Milwaukee Brewers	NL-Central	OF	582100
+Garcia, Avisail	Milwaukee Brewers	NL-Central	OF	10750000
+Hader, Josh	Milwaukee Brewers	NL-Central	RP	6675000
+Hiura, Keston	Milwaukee Brewers	NL-Central	1B	584600
+Houser, Adrian	Milwaukee Brewers	NL-Central	SP	584100
+Lindblom, Josh	Milwaukee Brewers	NL-Central	RP	3041667
+Lopes, Tim	Milwaukee Brewers	NL-Central	2B	576100
+Mathias, Mark	Milwaukee Brewers	NL-Central	INF	572000
+McKinney, Billy	Milwaukee Brewers	NL-Central	OF	578100
+Narvaez, Omar	Milwaukee Brewers	NL-Central	C	2500000
+Nottingham, Jacob	Milwaukee Brewers	NL-Central	C	575400
+Peralta, Freddy	Milwaukee Brewers	NL-Central	SP	1234960
+Pina, Manny	Milwaukee Brewers	NL-Central	C	1650000
+Rasmussen, Drew	Milwaukee Brewers	NL-Central	RP	573000
+Robertson, Daniel	Milwaukee Brewers	NL-Central	3B	900000
+Shaw, Travis	Milwaukee Brewers	NL-Central	3B	1500000
+Suter, Brent	Milwaukee Brewers	NL-Central	RP	1600000
+Topa, Justin	Milwaukee Brewers	NL-Central	RP	573000
+Urias, Luis	Milwaukee Brewers	NL-Central	SS	575100
+Vogelbach, Dan	Milwaukee Brewers	NL-Central	1B	1400000
+Wahl, Bobby	Milwaukee Brewers	NL-Central	RP	576700
+Williams, Devin	Milwaukee Brewers	NL-Central	RP	681100
+Wong, Kolten	Milwaukee Brewers	NL-Central	2B	7202565
+Woodruff, Brandon	Milwaukee Brewers	NL-Central	SP	3275000
+Yardley, Eric	Milwaukee Brewers	NL-Central	RP	577800
+Yelich, Christian	Milwaukee Brewers	NL-Central	OF	14000000
+Alcala, Jorge	Minnesota Twins	AL-Central	RP	575500
+Arraez, Luis	Minnesota Twins	AL-Central	INF	611000
+Astudillo, Willians	Minnesota Twins	AL-Central	C	573500
+Berrios, Jose	Minnesota Twins	AL-Central	SP	6100000
+Buxton, Byron	Minnesota Twins	AL-Central	OF	5125000
+Cave, Jake	Minnesota Twins	AL-Central	OF	597500
+Colina, Edwar	Minnesota Twins	AL-Central	RP	570500
+Colome, Alex	Minnesota Twins	AL-Central	RP	5000000
+Cruz, Nelson	Minnesota Twins	AL-Central	DH	13000000
+Dobnak, Randy	Minnesota Twins	AL-Central	RP	700000
+Donaldson, Josh	Minnesota Twins	AL-Central	3B	21750000
+Duffey, Tyler	Minnesota Twins	AL-Central	RP	2200000
+Garlick, Kyle	Minnesota Twins	AL-Central	OF	570500
+Garver, Mitch	Minnesota Twins	AL-Central	C	1875000
+Happ, J.A.	Minnesota Twins	AL-Central	SP	8000000
+Jeffers, Ryan	Minnesota Twins	AL-Central	C	575500
+Kepler, Max	Minnesota Twins	AL-Central	OF	6500000
+Maeda, Kenta	Minnesota Twins	AL-Central	SP	3000000
+Pineda, Michael	Minnesota Twins	AL-Central	SP	10000000
+Polanco, Jorge	Minnesota Twins	AL-Central	2B	4333333
+Robles, Hansel	Minnesota Twins	AL-Central	RP	2000000
+Rogers, Taylor	Minnesota Twins	AL-Central	RP	6000000
+Sano, Miguel	Minnesota Twins	AL-Central	1B	12333333
+Shoemaker, Matt	Minnesota Twins	AL-Central	SP	2000000
+Simmons, Andrelton	Minnesota Twins	AL-Central	SS	10500000
+Stashak, Cody	Minnesota Twins	AL-Central	RP	576000
+Thielbar, Caleb	Minnesota Twins	AL-Central	RP	650000
+Almora Jr., Albert	New York Mets	NL-East	OF	1250000
+Alonso, Pete	New York Mets	NL-East	1B	676775
+Barnes, Jacob	New York Mets	NL-East	RP	750000
+Betances, Dellin	New York Mets	NL-East	RP	6800000
+Cano, Robinson	New York Mets	NL-East	2B	24000000
+Carrasco, Carlos	New York Mets	NL-East	SP	12000000
+Castro, Miguel	New York Mets	NL-East	RP	1687500
+Conforto, Michael	New York Mets	NL-East	OF	12250000
+Davis, J.D.	New York Mets	NL-East	3B	2100000
+deGrom, Jacob	New York Mets	NL-East	SP	28131955
+Diaz, Edwin	New York Mets	NL-East	RP	7000000
+Familia, Jeurys	New York Mets	NL-East	RP	11609950
+Gsellman, Robert	New York Mets	NL-East	RP	1300000
+Guillorme, Luis	New York Mets	NL-East	2B	580701
+Lindor, Francisco	New York Mets	NL-East	SS	22300000
+Loup, Aaron	New York Mets	NL-East	RP	3000000
+Lucchesi, Joey	New York Mets	NL-East	SP	607100
+Lugo, Seth	New York Mets	NL-East	SP	2925000
+Martinez, Jose	New York Mets	NL-East	OF	1000000
+May, Trevor	New York Mets	NL-East	RP	7750000
+McCann, James	New York Mets	NL-East	C	8150000
+McNeil, Jeff	New York Mets	NL-East	2B	642251
+Nido, Tomas	New York Mets	NL-East	C	577720
+Nimmo, Brandon	New York Mets	NL-East	OF	4700000
+Peterson, David	New York Mets	NL-East	SP	585750
+Pillar, Kevin	New York Mets	NL-East	OF	3600000
+Smith, Dominic	New York Mets	NL-East	OF	2550000
+Smith, Drew	New York Mets	NL-East	RP	574500
+Stroman, Marcus	New York Mets	NL-East	SP	18900000
+Syndergaard, Noah	New York Mets	NL-East	SP	9700000
+Villar, Jonathan	New York Mets	NL-East	2B	3550000
+Walker, Taijuan	New York Mets	NL-East	SP	8666667
+Andujar, Miguel	New York Yankees	AL-East	3B	639000
+Britton, Zack	New York Yankees	AL-East	RP	13000000
+Bruce, Jay	New York Yankees	AL-East	1B	1350000
+Cessa, Luis	New York Yankees	AL-East	RP	1050000
+Chapman, Aroldis	New York Yankees	AL-East	RP	16000000
+Cole, Gerrit	New York Yankees	AL-East	SP	36000000
+Frazier, Clint	New York Yankees	AL-East	0F	2100000
+Gardner, Brett	New York Yankees	AL-East	OF	2850000
+German, Domingo	New York Yankees	AL-East	SP	619675
+Green, Chad	New York Yankees	AL-East	RP	2150000
+Hicks, Aaron	New York Yankees	AL-East	OF	10785714
+Higashioka, Kyle	New York Yankees	AL-East	C	594000
+Judge, Aaron	New York Yankees	AL-East	OF	10175000
+King, Michael	New York Yankees	AL-East	RP	586500
+Kluber, Corey	New York Yankees	AL-East	SP	11000000
+LeMahieu, D.J.	New York Yankees	AL-East	2B	15000000
+Loaisiga, Jonathan	New York Yankees	AL-East	RP	595800
+Luetge, Lucas	New York Yankees	AL-East	RP	600000
+Montgomery, Jordan	New York Yankees	AL-East	SP	2130000
+Nelson, Nick	New York Yankees	AL-East	RP	575150
+O'Day, Darren	New York Yankees	AL-East	RP	1750000
+Sanchez, Gary	New York Yankees	AL-East	C	6350000
+Schmidt, Clarke	New York Yankees	AL-East	RP	571925
+Severino, Luis	New York Yankees	AL-East	SP	10750000
+Stanton, Giancarlo	New York Yankees	AL-East	OF	29000000
+Taillon, Jameson	New York Yankees	AL-East	SP	2250000
+Tauchman, Mike	New York Yankees	AL-East	OF	624200
+Torres, Gleyber	New York Yankees	AL-East	SS	4000000
+Urshela, Gio	New York Yankees	AL-East	3B	4650000
+Voit, Luke	New York Yankees	AL-East	1B	4700000
+Wade, Tyler	New York Yankees	AL-East	2B	603300
+Wilson, Justin	New York Yankees	AL-East	RP	2850000
+Andrus, Elvis	Oakland Athletics	AL-West	SS	14000000
+Bassitt, Chris	Oakland Athletics	AL-West	SP	4900000
+Canha, Mark	Oakland Athletics	AL-West	OF	6925000
+Chapman, Matt	Oakland Athletics	AL-West	3B	6490000
+Diekman, Jake	Oakland Athletics	AL-West	RP	4000000
+Fiers, Mike	Oakland Athletics	AL-West	SP	3500000
+Garcia, Aramis	Oakland Athletics	AL-West	C	575500
+Guduan, Reymin	Oakland Athletics	AL-West	RP	570500
+Irvin, Cole	Oakland Athletics	AL-West	RP	573000
+Kemp, Tony	Oakland Athletics	AL-West	2B	1050000
+Kolarek, Adam	Oakland Athletics	AL-West	RP	595500
+Laureano, Ramon	Oakland Athletics	AL-West	OF	580500
+Lowrie, Jed	Oakland Athletics	AL-West	2B	1500000
+Luzardo, Jesus	Oakland Athletics	AL-West	SP	575500
+Manaea, Sean	Oakland Athletics	AL-West	SP	5950000
+Montas, Frankie	Oakland Athletics	AL-West	SP	1800000
+Moreland, Mitch	Oakland Athletics	AL-West	1B	2250000
+Murphy, Sean	Oakland Athletics	AL-West	C	575500
+Olson, Matt	Oakland Athletics	AL-West	1B	5000000
+Petit, Yusmeiro	Oakland Athletics	AL-West	RP	2550000
+Pinder, Chad	Oakland Athletics	AL-West	2B	2275000
+Piscotty, Stephen	Oakland Athletics	AL-West	OF	7250000
+Romo, Sergio	Oakland Athletics	AL-West	RP	2250000
+Rosenthal, Trevor	Oakland Athletics	AL-West	RP	10644074
+Smith, Burch	Oakland Athletics	AL-West	RP	705000
+Tom, Ka'ai	Oakland Athletics	AL-West	OF	570500
+Trivino, Lou	Oakland Athletics	AL-West	RP	912500
+Wendelken, J.B.	Oakland Athletics	AL-West	RP	580500
+Alvarado, Jose	Philadelphia Phillies	NL-East	RP	1000000
+Anderson, Chase	Philadelphia Phillies	NL-East	SP	4000000
+Bohm, Alec	Philadelphia Phillies	NL-East	3B	575000
+Bradley, Archie	Philadelphia Phillies	NL-East	RP	6000000
+Brogdon, Connor	Philadelphia Phillies	NL-East	RP	571500
+Coonrod, Sam	Philadelphia Phillies	NL-East	RP	573000
+Dominguez, Seranthony	Philadelphia Phillies	NL-East	RP	727500
+Eflin, Zach	Philadelphia Phillies	NL-East	SP	4450000
+Gregorius, Didi	Philadelphia Phillies	NL-East	SS	11900314
+Hale, David	Philadelphia Phillies	NL-East	RP	850000
+Harper, Bryce	Philadelphia Phillies	NL-East	OF	27538462
+Haseley, Adam	Philadelphia Phillies	NL-East	OF	578500
+Hoskins, Rhys	Philadelphia Phillies	NL-East	1B	4800000
+Joyce, Matt	Philadelphia Phillies	NL-East	OF	1500000
+Kintzler, Brandon	Philadelphia Phillies	NL-East	RP	3000000
+Knapp, Andrew	Philadelphia Phillies	NL-East	C	1100000
+McCutchen, Andrew	Philadelphia Phillies	NL-East	OF	20000000
+Miller, Brad	Philadelphia Phillies	NL-East	2B	3500000
+Moore, Matt	Philadelphia Phillies	NL-East	SP	3000000
+Neris, Hector	Philadelphia Phillies	NL-East	RP	5000000
+Nola, Aaron	Philadelphia Phillies	NL-East	SP	12250000
+Quinn, Roman	Philadelphia Phillies	NL-East	OF	578000
+Realmuto, J.T.	Philadelphia Phillies	NL-East	C	18048556
+Segura, Jean	Philadelphia Phillies	NL-East	2B	14250000
+Torreyes, Ronald	Philadelphia Phillies	NL-East	INF	800000
+Velasquez, Vince	Philadelphia Phillies	NL-East	RP	4000000
+Wheeler, Zack	Philadelphia Phillies	NL-East	SP	22500000
+Alford, Anthony	Pittsburgh Pirates	NL-Central	OF	582000
+Anderson, Tyler	Pittsburgh Pirates	NL-Central	SP	2500000
+Bednar, David	Pittsburgh Pirates	NL-Central	RP	579000
+Brault, Steven	Pittsburgh Pirates	NL-Central	SP	2050000
+Brubaker, J.T.	Pittsburgh Pirates	NL-Central	SP	590500
+Cahill, Trevor	Pittsburgh Pirates	NL-Central	RP	1500000
+Cederlind, Blake	Pittsburgh Pirates	NL-Central	RP	579000
+Crick, Kyle	Pittsburgh Pirates	NL-Central	RP	800000
+Crowe, Wil	Pittsburgh Pirates	NL-Central	SP	574000
+Davis, Austin	Pittsburgh Pirates	NL-Central	RP	588000
+Evans, Phillip	Pittsburgh Pirates	NL-Central	INF	650000
+Feliz, Michael	Pittsburgh Pirates	NL-Central	RP	1000000
+Fowler, Dustin	Pittsburgh Pirates	NL-Central	OF	575500
+Frazier, Adam	Pittsburgh Pirates	NL-Central	2B	4300000
+Gonzalez, Erik	Pittsburgh Pirates	NL-Central	SS	1225000
+Hayes, Ke'Bryan	Pittsburgh Pirates	NL-Central	3B	589500
+Holmes, Clay	Pittsburgh Pirates	NL-Central	RP	650000
+Howard, Sam	Pittsburgh Pirates	NL-Central	RP	596000
+Keller, Mitch	Pittsburgh Pirates	NL-Central	SP	579000
+Kuhl, Chad	Pittsburgh Pirates	NL-Central	SP	2130000
+Moran, Colin	Pittsburgh Pirates	NL-Central	1B	2800000
+Newman, Kevin	Pittsburgh Pirates	NL-Central	SS	598000
+Oviedo, Luis	Pittsburgh Pirates	NL-Central	RP	570500
+Perez, Michael	Pittsburgh Pirates	NL-Central	C	591500
+Polanco, Gregory	Pittsburgh Pirates	NL-Central	OF	11600000
+Ponce, Cody	Pittsburgh Pirates	NL-Central	SP	580500
+Reynolds, Bryan	Pittsburgh Pirates	NL-Central	OF	601000
+Rodriguez, Richard	Pittsburgh Pirates	NL-Central	RP	1700000
+Soriano, Jose	Pittsburgh Pirates	NL-Central	SP	570500
+Stallings, Jacob	Pittsburgh Pirates	NL-Central	C	1300000
+Stratton, Chris	Pittsburgh Pirates	NL-Central	RP	1100000
+Underwood Jr., Duane	Pittsburgh Pirates	NL-Central	RP	584500
+Adams, Austin	San Diego Padres	NL-West	RP	580200
+Altavilla, Dan	San Diego Padres	NL-West	RP	850000
+Baez, Michael	San Diego Padres	NL-West	RP	574200
+Campusano, Luis	San Diego Padres	NL-West	C	571100
+Caratini, Victor	San Diego Padres	NL-West	C	1300000
+Clevinger, Mike	San Diego Padres	NL-West	SP	3500000
+Crismatt, Nabil	San Diego Padres	NL-West	RP	585000
+Cronenworth, Jake	San Diego Padres	NL-West	2B	584900
+Darvish, Yu	San Diego Padres	NL-West	SP	23000000
+Grisham, Trent	San Diego Padres	NL-West	OF	589200
+Guerra, Javy	San Diego Padres	NL-West	RP	573100
+Hill, Tim	San Diego Padres	NL-West	RP	596000
+Hosmer, Eric	San Diego Padres	NL-West	1B	21000000
+Johnson, Pierce	San Diego Padres	NL-West	RP	2000000
+Kela, Keone	San Diego Padres	NL-West	RP	1200000
+Kim, Ha-Seong	San Diego Padres	NL-West	2B	5000000
+Lamet, Dinelson	San Diego Padres	NL-West	SP	4200000
+Machado, Manny	San Diego Padres	NL-West	3B	34000000
+Marcano, Tucupita	San Diego Padres	NL-West	OF	570500
+Mateo, Jorge	San Diego Padres	NL-West	OF	571800
+Melancon, Mark	San Diego Padres	NL-West	RP	2000000
+Morejon, Adrian	San Diego Padres	NL-West	SP	572900
+Musgrove, Joe	San Diego Padres	NL-West	SP	4450000
+Myers, Wil	San Diego Padres	NL-West	OF	22500000
+Nola, Austin	San Diego Padres	NL-West	C	571500
+Ona, Jorge	San Diego Padres	NL-West	OF	571100
+Paddack, Chris	San Diego Padres	NL-West	SP	610900
+Pagan, Emilio	San Diego Padres	NL-West	RP	1570000
+Pham, Tommy	San Diego Padres	NL-West	OF	8900000
+Pomeranz, Drew	San Diego Padres	NL-West	RP	8000000
+Profar, Jurickson	San Diego Padres	NL-West	OF	6000000
+Snell, Blake	San Diego Padres	NL-West	SP	10500000
+Stammen, Craig	San Diego Padres	NL-West	RP	4000000
+Strahm, Matt	San Diego Padres	NL-West	RP	2050000
+Tatis Jr., Fernando	San Diego Padres	NL-West	SS	1714286
+Weathers, Ryan	San Diego Padres	NL-West	RP	570700
+Williams, Taylor	San Diego Padres	NL-West	RP	577500
+Alvarez, Jose	San Francisco Giants	NL-West	RP	1150000
+Baragar, Caleb	San Francisco Giants	NL-West	RP	583000
+Belt, Brandon	San Francisco Giants	NL-West	1B	17200000
+Casali, Curtis	San Francisco Giants	NL-West	C	1500000
+Crawford, Brandon	San Francisco Giants	NL-West	SS	15200000
+Cueto, Johnny	San Francisco Giants	NL-West	SP	21000000
+DeSclafani, Anthony	San Francisco Giants	NL-West	SP	5929335
+Dickerson, Alex	San Francisco Giants	NL-West	OF	2100000
+Dubon, Mauricio	San Francisco Giants	NL-West	OF	583000
+Flores, Wilmer	San Francisco Giants	NL-West	3B	3000000
+Garcia, Jarlin	San Francisco Giants	NL-West	RP	950000
+Gausman, Kevin	San Francisco Giants	NL-West	SP	18900000
+La Stella, Tommy	San Francisco Giants	NL-West	1B	2000000
+Longoria, Evan	San Francisco Giants	NL-West	3B	16500000
+McGee, Jake	San Francisco Giants	NL-West	RP	2000000
+Moronta, Reyes	San Francisco Giants	NL-West	RP	695000
+Peralta, Wandy	San Francisco Giants	NL-West	RP	925000
+Posey, Buster	San Francisco Giants	NL-West	C	22177778
+Rogers, Tyler	San Francisco Giants	NL-West	RP	583000
+Ruf, Darin	San Francisco Giants	NL-West	1B	1275000
+Sanchez, Aaron	San Francisco Giants	NL-West	SP	4000000
+Slater, Austin	San Francisco Giants	NL-West	OF	1150000
+Solano, Donovan	San Francisco Giants	NL-West	2B	3250000
+Webb, Logan	San Francisco Giants	NL-West	SP	583000
+Wisler, Matt	San Francisco Giants	NL-West	RP	1150000
+Wood, Alex	San Francisco Giants	NL-West	SP	3000000
+Yastrzemski, Mike	San Francisco Giants	NL-West	OF	600000
+Crawford, J.P.	Seattle Mariners	AL-West	SS	2050000
+Dunn, Justin	Seattle Mariners	AL-West	SP	584900
+Flexen, Chris	Seattle Mariners	AL-West	SP	1700000
+Fraley, Jake	Seattle Mariners	AL-West	OF	572100
+France, Ty	Seattle Mariners	AL-West	3B	587800
+Giles, Ken	Seattle Mariners	AL-West	RP	1250000
+Gonzales, Marco	Seattle Mariners	AL-West	SP	5200000
+Graveman, Kendall	Seattle Mariners	AL-West	RP	1250000
+Haggerty, Sam	Seattle Mariners	AL-West	OF	574300
+Haniger, Mitch	Seattle Mariners	AL-West	OF	3010000
+Kikuchi, Yusei	Seattle Mariners	AL-West	SP	17000000
+Lewis, Kyle	Seattle Mariners	AL-West	OF	625000
+Long, Shed	Seattle Mariners	AL-West	OF	580500
+Margevicius, Nick	Seattle Mariners	AL-West	RP	586900
+Marmolejos, Jose	Seattle Mariners	AL-West	INF	575500
+Middleton, Keynan	Seattle Mariners	AL-West	RP	800000
+Misiewicz, Anthony	Seattle Mariners	AL-West	RP	578700
+Montero, Rafael	Seattle Mariners	AL-West	RP	2250000
+Moore, Dylan	Seattle Mariners	AL-West	2B	590400
+Murphy, Tom	Seattle Mariners	AL-West	C	875000
+Paxton, James	Seattle Mariners	AL-West	SP	8500000
+Sadler, Casey	Seattle Mariners	AL-West	RP	591800
+Seager, Kyle	Seattle Mariners	AL-West	3B	18500000
+Sheffield, Justus	Seattle Mariners	AL-West	SP	625000
+Steckenrider, Drew	Seattle Mariners	AL-West	RP	800000
+Torrens, Luis	Seattle Mariners	AL-West	C	580700
+Trammell, Taylor	Seattle Mariners	AL-West	OF	570500
+Vest, Will	Seattle Mariners	AL-West	RP	570500
+White, Evan	Seattle Mariners	AL-West	1B	1300000
+Arenado, Nolan	St. Louis Cardinals	NL-Central	3B	35000000
+Bader, Harrison	St. Louis Cardinals	NL-Central	OF	2000000
+Cabrera, Genesis	St. Louis Cardinals	NL-Central	RP	580900
+Carlson, Dylan	St. Louis Cardinals	NL-Central	OF	577100
+Carpenter, Matt	St. Louis Cardinals	NL-Central	3B	18500000
+Dean, Austin	St. Louis Cardinals	NL-Central	OF	583100
+DeJong, Paul	St. Louis Cardinals	NL-Central	SS	4166667
+Edman, Tommy	St. Louis Cardinals	NL-Central	2B	596000
+Flaherty, Jack	St. Louis Cardinals	NL-Central	SP	3900000
+Gallegos, Giovanny	St. Louis Cardinals	NL-Central	RP	594500
+Gant, John	St. Louis Cardinals	NL-Central	SP	2100000
+Goldschmidt, Paul	St. Louis Cardinals	NL-Central	1B	25333333
+Helsley, Ryan	St. Louis Cardinals	NL-Central	RP	582300
+Hicks, Jordan	St. Louis Cardinals	NL-Central	RP	862500
+Hudson, Dakota	St. Louis Cardinals	NL-Central	SP	595700
+Kim, Kwang Hyun	St. Louis Cardinals	NL-Central	SP	4000000
+Knizner, Andrew	St. Louis Cardinals	NL-Central	C	579200
+Martinez, Carlos	St. Louis Cardinals	NL-Central	SP	11700000
+Mikolas, Miles	St. Louis Cardinals	NL-Central	SP	17000000
+Miller, Andrew	St. Louis Cardinals	NL-Central	RP	12000000
+Molina, Yadier	St. Louis Cardinals	NL-Central	C	9000000
+Nogowski, John	St. Louis Cardinals	NL-Central	1B	571300
+O'Neill, Tyler	St. Louis Cardinals	NL-Central	OF	594700
+Ponce de Leon, Daniel	St. Louis Cardinals	NL-Central	RP	585500
+Reyes, Alex	St. Louis Cardinals	NL-Central	RP	900000
+Sosa, Edmundo	St. Louis Cardinals	NL-Central	INF	575900
+Wainwright, Adam	St. Louis Cardinals	NL-Central	SP	8000000
+Webb, Tyler	St. Louis Cardinals	NL-Central	RP	593000
+Williams, Justin	St. Louis Cardinals	NL-Central	OF	572000
+Woodford, Jake	St. Louis Cardinals	NL-Central	RP	578300
+Adames, Willy	Tampa Bay Rays	AL-East	SS	590000
+Anderson, Nick	Tampa Bay Rays	AL-East	RP	587800
+Archer, Chris	Tampa Bay Rays	AL-East	SP	6500000
+Arozarena, Randy	Tampa Bay Rays	AL-East	OF	581200
+Beeks, Jalen	Tampa Bay Rays	AL-East	RP	588800
+Brosseau, Michael	Tampa Bay Rays	AL-East	OF	586300
+Castillo, Diego	Tampa Bay Rays	AL-East	RP	582300
+Chirinos, Yonny	Tampa Bay Rays	AL-East	RP	1175000
+Choi, Ji-Man	Tampa Bay Rays	AL-East	1B	2450000
+Diaz, Yandy	Tampa Bay Rays	AL-East	3B	588900
+Drake, Oliver	Tampa Bay Rays	AL-East	RP	775000
+Fairbanks, Peter	Tampa Bay Rays	AL-East	RP	583800
+Glasnow, Tyler	Tampa Bay Rays	AL-East	SP	4000000
+Hill, Rich	Tampa Bay Rays	AL-East	SP	2500000
+Kiermaier, Kevin	Tampa Bay Rays	AL-East	OF	11666667
+Kittredge, Andrew	Tampa Bay Rays	AL-East	RP	750000
+Lowe, Brandon	Tampa Bay Rays	AL-East	2B	2500000
+Margot, Manuel	Tampa Bay Rays	AL-East	OF	3400000
+McHugh, Collin	Tampa Bay Rays	AL-East	RP	1800000
+Meadows, Austin	Tampa Bay Rays	AL-East	OF	581400
+Mejia, Francisco	Tampa Bay Rays	AL-East	C	580500
+Phillips, Brett	Tampa Bay Rays	AL-East	OF	584400
+Poche, Colin	Tampa Bay Rays	AL-East	RP	577800
+Reed, Cody	Tampa Bay Rays	AL-East	RP	581200
+Roe, Chaz	Tampa Bay Rays	AL-East	RP	1150000
+Sherriff, Ryan	Tampa Bay Rays	AL-East	RP	574800
+Springs, Jeffrey	Tampa Bay Rays	AL-East	RP	585000
+Thompson, Ryan	Tampa Bay Rays	AL-East	RP	577200
+Tsutsugo, Yoshi	Tampa Bay Rays	AL-East	1B	7000000
+Wacha, Michael	Tampa Bay Rays	AL-East	SP	3000000
+Wendle, Joey	Tampa Bay Rays	AL-East	3B	2250000
+Yarbrough, Ryan	Tampa Bay Rays	AL-East	SP	2300000
+Zunino, Mike	Tampa Bay Rays	AL-East	C	2000000
+Allard, Kolby	Texas Rangers	AL-West	RP	584250
+Arihara, Kohei	Texas Rangers	AL-West	SP	2600000
+Benjamin, Wes	Texas Rangers	AL-West	RP	574500
+Burke, Brock	Texas Rangers	AL-West	SP	572500
+Bush, Matt	Texas Rangers	AL-West	RP	680000
+Calhoun, Willie	Texas Rangers	AL-West	OF	593000
+Cody, Kyle	Texas Rangers	AL-West	RP	573500
+Culberson, Charlie	Texas Rangers	AL-West	INF	1500000
+Dahl, David	Texas Rangers	AL-West	OF	2700000
+Davis, Khris	Texas Rangers	AL-West	DH	16750000
+de Geus, Brett	Texas Rangers	AL-West	RP	570500
+Dunning, Dane	Texas Rangers	AL-West	SP	572500
+Evans, Demarcus	Texas Rangers	AL-West	RP	571500
+Foltynewicz, Mike	Texas Rangers	AL-West	SP	2000000
+Gallo, Joey	Texas Rangers	AL-West	OF	6200000
+Gibson, Kyle	Texas Rangers	AL-West	SP	9666667
+Guzman, Ronald	Texas Rangers	AL-West	1B	606000
+Hearn, Taylor	Texas Rangers	AL-West	RP	582500
+Heim, Jonah	Texas Rangers	AL-West	C	574000
+Hernandez, Jonathan	Texas Rangers	AL-West	RP	587500
+Holt, Brock	Texas Rangers	AL-West	INF	1750000
+Huff, Sam	Texas Rangers	AL-West	C	572000
+Kennedy, Ian	Texas Rangers	AL-West	RP	2150000
+Kiner-Falefa, Isiah	Texas Rangers	AL-West	SS	2000000
+King, John	Texas Rangers	AL-West	RP	572500
+Leclerc, Jose	Texas Rangers	AL-West	RP	4500000
+Lowe, Nate	Texas Rangers	AL-West	1B	575000
+Lyles, Jordan	Texas Rangers	AL-West	SP	8000000
+Martin, Brett	Texas Rangers	AL-West	RP	589500
+Rodriguez, Joely	Texas Rangers	AL-West	RP	2500000
+Sborz, Josh	Texas Rangers	AL-West	RP	573500
+Solak, Nick	Texas Rangers	AL-West	2B	586000
+Taveras, Leody	Texas Rangers	AL-West	OF	574000
+Trevino, Jose	Texas Rangers	AL-West	C	584000
+White, Eli	Texas Rangers	AL-West	OF	572500
+Bichette, Bo	Toronto Blue Jays	AL-East	SS	587800
+Biggio, Cavan	Toronto Blue Jays	AL-East	3B	604000
+Borucki, Ryan	Toronto Blue Jays	AL-East	RP	595200
+Chatwood, Tyler	Toronto Blue Jays	AL-East	RP	3000000
+Davis, Jonathan	Toronto Blue Jays	AL-East	OF	579800
+Dolis, Rafael	Toronto Blue Jays	AL-East	RP	1500000
+Grichuk, Randal	Toronto Blue Jays	AL-East	OF	10333333
+Guerrero Jr., Vladimir	Toronto Blue Jays	AL-East	OF	605400
+Gurriel, Lourdes	Toronto Blue Jays	AL-East	OF	3928571
+Hatch, Thomas	Toronto Blue Jays	AL-East	SP	584800
+Hernandez, Teoscar	Toronto Blue Jays	AL-East	OF	4325000
+Jansen, Danny	Toronto Blue Jays	AL-East	C	601800
+Kirk, Alejandro	Toronto Blue Jays	AL-East	C	573500
+Matz, Steven	Toronto Blue Jays	AL-East	SP	5200000
+Mayza, Tim	Toronto Blue Jays	AL-East	RP	600000
+Merryweather, Julian	Toronto Blue Jays	AL-East	RP	578400
+Panik, Joe	Toronto Blue Jays	AL-East	2B	1850000
+Payamps, Joel	Toronto Blue Jays	AL-East	RP	580000
+Pearson, Nate	Toronto Blue Jays	AL-East	SP	577500
+Phelps, David	Toronto Blue Jays	AL-East	RP	1750000
+Ray, Robbie	Toronto Blue Jays	AL-East	SP	8000000
+Roark, Tanner	Toronto Blue Jays	AL-East	SP	12000000
+Romano, Jordan	Toronto Blue Jays	AL-East	RP	584000
+Ryu, Hyun-Jin	Toronto Blue Jays	AL-East	SP	20000000
+Semien, Marcus	Toronto Blue Jays	AL-East	2B	18000000
+Springer, George	Toronto Blue Jays	AL-East	OF	23666667
+Stripling, Ross	Toronto Blue Jays	AL-East	SP	3000000
+Tellez, Rowdy	Toronto Blue Jays	AL-East	DH	598100
+Thornton, Trent	Toronto Blue Jays	AL-East	RP	592900
+Yates, Kirby	Toronto Blue Jays	AL-East	RP	5500000
+Zeuch, T.J.	Toronto Blue Jays	AL-East	SP	578000
+Avila, Alex	Washington Nationals	NL-East	C	1483059
+Avilan, Luis	Washington Nationals	NL-East	RP	950000
+Barrera, Tres	Washington Nationals	NL-East	C	571500
+Bell, Josh	Washington Nationals	NL-East	1B	6350000
+Castro, Starlin	Washington Nationals	NL-East	3B	7000000
+Clay, Sam	Washington Nationals	NL-East	RP	575000
+Corbin, Patrick	Washington Nationals	NL-East	SP	24416667
+Fedde, Erick	Washington Nationals	NL-East	RP	599200
+Finnegan, Kyle	Washington Nationals	NL-East	RP	582400
+Gomes, Yan	Washington Nationals	NL-East	C	6000000
+Hand, Brad	Washington Nationals	NL-East	RP	10120196
+Harris, Will	Washington Nationals	NL-East	RP	8000000
+Harrison, Josh	Washington Nationals	NL-East	2B	1000000
+Hernandez, Yadiel	Washington Nationals	NL-East	OF	572600
+Hudson, Daniel	Washington Nationals	NL-East	RP	6000000
+Lester, Jon	Washington Nationals	NL-East	SP	4786954
+Mercer, Jordy	Washington Nationals	NL-East	SS	1000000
+Perez, Hernan	Washington Nationals	NL-East	2B	750000
+Rainey, Tanner	Washington Nationals	NL-East	RP	589000
+Robles, Victor	Washington Nationals	NL-East	OF	614000
+Ross, Joe	Washington Nationals	NL-East	SP	1500000
+Scherzer, Max	Washington Nationals	NL-East	SP	34503480
+Schwarber, Kyle	Washington Nationals	NL-East	OF	7000000
+Soto, Juan	Washington Nationals	NL-East	OF	8500000
+Stevenson, Andrew	Washington Nationals	NL-East	OF	579100
+Strasburg, Stephen	Washington Nationals	NL-East	SP	32045256
+Suero, Wander	Washington Nationals	NL-East	RP	600700
+Turner, Trea	Washington Nationals	NL-East	SS	13000000
+Voth, Austin	Washington Nationals	NL-East	RP	587700
+Zimmerman, Ryan	Washington Nationals	NL-East	1B	1000000
