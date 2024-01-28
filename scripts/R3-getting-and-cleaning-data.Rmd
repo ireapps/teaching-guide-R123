@@ -1,0 +1,549 @@
+---
+title: "R3 | Getting and Cleaning Data"
+author: "Sean Mussenden"
+date: "3/2/2023"
+output: html_document
+---
+
+## To do for Crit
+
+- Update "Loading data from flat file on the internet" to pull csv from current repo.
+- I can't get googlesheets4 to work even after authentication.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intro 
+
+### What We're Doing
+
+In this hourlong session, we're going to show you two things:
+
+**1. The many ways to get data in RStudio!**
+* *We'll practice loading data from:* a built in R dataset, an R package, a local csv, an Excel file, and an html table. If the wifi cooperates, we'll also show how to load from a csv on the web and read in a Google Sheet.
+* *I'll introduce you to resources that will show you how to:* pull data from an API (like the Census), and pull data from a database. 
+
+**2. Some data cleaning tricks in R!**
+* *We'll practice:* cleaning up column names, correcting erroneous values, converting data types, manipulating strings. 
+
+### What You'll Get Out of This
+
+* You won't leave here an expert.  
+* You will leave here understanding some basic loading and cleaning data concepts in R, a list of helpful packages, and some resources for further learning. 
+
+## Let's go
+
+### Set your working directory
+
+We'll want to set our working directory inside of the notebooks folder.  I'll show you how to do that in RStudio. 
+
+### Load packages
+
+We'll need to load several packages for this class.  
+
+They are:
+* The [babynames](https://cran.r-project.org/web/packages/babynames/index.html) package for loading social security babyname data. 
+* The [Tidvyerse](https://www.tidyverse.org/) collection of packages. We'll be making extensive use of the readr, dplyr and stringr packages,which all load as part of the tidyverse core.  
+  * [readr](https://readr.tidyverse.org/)
+  * [dplyr](https://dplyr.tidyverse.org/)
+  * [stringr](https://stringr.tidyverse.org/)
+* The [rvest](http://rvest.tidyverse.org/) package for web scraping.
+* The [janitor](https://github.com/sfirke/janitor) package for data cleaning. 
+* The [readxl](https://readxl.tidyverse.org/) package for loading Excel files. 
+* The [googlesheets4](https://googlesheets4.tidyverse.org/) package for reading -- and writing -- data stored in a Google Sheet. 
+
+
+```{r}
+## Install packages if you need them by uncommenting these lines
+#install.packages('babynames')
+#install.packages('tidyverse')
+#install.packages('rvest')
+#install.packages('janitor')
+#install.packages('readxl')
+# install.packages('googlesheets4')
+#install.packages('babynames')
+
+# Turn off scientific notation
+options(scipen=999)
+
+# Load libraries
+library(tidyverse)
+library(rvest)
+library(janitor)
+library(readxl)
+library(googlesheets4)
+library(babynames)
+library(lubridate)
+
+
+```
+
+### Loading preloaded data from a package
+
+If you've taken earlier classes in this sequence, you'll have loaded Social Security Administration data on names of babies born across the last ~100 years. It comes built in with the 'babynames' package we loaded. 
+
+To refresh, let's load that now and store it as an object called `babynames_package_df`.
+
+We're going to load the same data from different locations, using different methods, to show you how some of the many ways to get data into R.
+
+```{r}
+
+# Load babynames
+babynames_package_df <- babynames
+
+# Show first 10 records
+babynames_package_df %>%
+  head(10)
+
+```
+
+#### Loading data from a local flat file
+
+Loading data from a flat file -- like a csv -- stored on your local machine is a very common data loading task.  For that, we'll use the `read_csv()` function that's part of the `readr` package that loads with the `tidyverse`. 
+
+We're going to read in a sample of the babynames data that contains all of the names that start with "A". 
+
+Store it as an object called "babynames_a_csv" (the name doesn't matter, can be anything). The information inside of `read_csv()` is the filepath to the data, which is stored in the data folder. 
+
+```{r}
+
+babynames_a_csv <- read_csv("../data/babynames_a.csv")
+
+```
+
+#### Loading data from a flat file on the internet
+
+We can load that same csv from the internet, instead of doing it locally.  We just need to change the information inside of the `read_csv()` function to pass a URL, instead of a location on our computer. 
+
+The CSV is up on Github.com, here: https://raw.githubusercontent.com/smussenden/nicar_2023_r_track/main/notebooks/data/babynames_a.csv
+
+Warning: this may not work if the wifi is buggy!
+
+```{r}
+babynames_a_csv_web <- read_csv("https://raw.githubusercontent.com/smussenden/nicar_2023_r_track/main/notebooks/data/babynames_a.csv")
+```
+
+#### Loading data from an Excel file
+
+Another data format you'll likely see in the wild: Excel files. They're a little trickier than csvs, because they can contain multiple sheets. 
+
+We can use the `read_xlsx()` function from the `readxl` package to load data from Excel files. 
+
+There's an Excel file in the data folder called babynames_excel.  It has two sheets, one with all of the "A" babynames, followed by one with all of the "B" babynames. 
+
+Let's load the first sheet, the "A" babynames, as a dataframe and store it as an object called babynames_a_excel.
+
+```{r}
+babynames_a_excel <- read_xlsx("../data/babynames_excel.xlsx")
+```
+
+Because the "A" names sheet is the first sheet in the Excel file, the function automatically loads the "A" sheet. 
+
+But if we need to get any other sheet, like the one containing the "B" names, we'll have to get it by adding another argument to the read_xlsx function. 
+
+The sheet is called "babynames_b".
+
+How can we load Sheet B?  Let's take a look at the handy help page for the readxl package.
+
+* You can either type ?read_xlsx in the console and look at what pops up on the right. 
+* Or you can visit https://readxl.tidyverse.org/reference/read_excel.html.  
+
+Can you see how to read in a different sheet from the first?  
+
+Let's modify the read_xlsx function below to load the sheet "babynames_b".
+
+```{r}
+babynames_b_excel <- read_xlsx("../data/babynames_excel.xlsx")
+
+```
+
+#### Loading data from an HTML table
+
+On this page is an HTML table showing the top 2021 baby names. https://www.ssa.gov/oact/babynames/. Because the wifi is often buggy, I've saved an HTML file locally of this page, which we'll work with instead.  It's in the data folder.
+
+We can use the inspector in our web browser to see this.  It's composed of html tags. 
+
+Using the `rvest` package we're going to first read in the entire html page using the `read_html()` function.
+
+```{r}
+# If we were going to pull directly from the web, instead of from a local file, this is what it will the function would look 
+
+# top_2021_baby_names <- read_html("https://www.ssa.gov/oact/babynames/") 
+
+# Instead, we're gonna load a local html file to simulate the act of scraping from the web
+top_2021_baby_names <- read_html("../data/html/ssa_baby_names.html")
+```
+
+Open it up in the environment window.  It's the full HTML of the page. 
+Next, we'll use `rvest` to extract the html table we want using `html_table()`
+
+```{r}
+top_2021_baby_names <- read_html("../data/html/ssa_baby_names.html") %>%
+  html_table()
+
+```
+
+Open it up in the environment window. We've isolated that one html table and turned it into a dataframe, albeit one that is nested in a list.  Let's extract it from the list. 
+
+```{r}
+
+# Load html and extract table
+top_2021_baby_names <- read_html("../data/html/ssa_baby_names.html") %>%
+  html_table()
+
+# Pluck out the table
+top_2021_baby_names <- top_2021_baby_names[[1]]
+
+# display it
+top_2021_baby_names
+
+```
+
+Never web scraped before? Now you have! A warning that web scraping does get more challenging from here. 
+
+#### Loading data from google sheets
+
+> TESTER HAVING TROUBLE MAKING GOOGLE AUTH WORK
+
+We can also load data directly from Google Sheets, using the `read_sheet()` function from the `googlesheets4` package.  Google Sheets, like Excel files, can also have multiple workbooks. 
+
+I've loaded up a Google Sheet workbook here with two sheets, one for "A" babynames and one for "B" babynames: https://docs.google.com/spreadsheets/d/1GG_RmYPGCNKbLb4x1dkQv1B9NjDBF0kQRtge9Aea4rs. These samples only have 1,000 records in them.
+
+To read in the sheet, we need to paste in the sheet ID, which is the long sting of numbers and letters at the end of the URL: "1GG_RmYPGCNKbLb4x1dkQv1B9NjDBF0kQRtge9Aea4rs"
+
+Because the "A" sheet comes first, it automatically loads that sheet.
+
+Before we get there, though, we'll need to authenticate with Google.  Look down in the console, select an account or hit 0 to start the process of in-browser authentication.
+
+```{r}
+gs4_auth()
+
+```
+
+Now we can read in the sheet.
+
+```{r}
+
+babynames_a_sheet <- read_sheet("1GG_RmYPGCNKbLb4x1dkQv1B9NjDBF0kQRtge9Aea4rs")
+```
+
+If we want to load any other sheet, we need to tell it which one to load. 
+
+```{r}
+babynames_b_sheet <- read_sheet("1GG_RmYPGCNKbLb4x1dkQv1B9NjDBF0kQRtge9Aea4rs", sheet = "babynames_b")
+```
+
+In addition to loading data from Google Sheets, you can also WRITE data from R Studio to Google Sheets.  This is such a great way to share data you've analyzed with other, less tech-savvy members of your team. More on that here: https://googlesheets4.tidyverse.org/index.html.  
+
+### Your Turn Option 1
+
+This page https://www.ssa.gov/oact/babynames/state/top5_2021.html, which I've also stored locally, contains tables of the top 5 birth names for 2021 by state, one for male and one for female.  
+
+Using what you just learned, I'd like you to take a stab at ingesting the html of this page, and saving each of the tables as a separate data frame.   
+
+```{r}
+
+# local path to the data 
+# "data/html/baby_names_2021_state.html"
+
+```
+
+### Your Turn Option 2
+
+538 puts a lot of neat data sets on its' GitHub organization page.  Here's the page to a dataset about the Avengers, from Marvel Comics:  
+
+https://github.com/fivethirtyeight/data/blob/master/avengers/avengers.csv
+
+Read this data into your environment and store it as an object called `avengers`. 
+
+```{r}
+
+```
+
+#### Other ways of getting data
+
+There are lots of other ways to bring data into R.  We don't have to delve into all of them today, but you should be aware of them for continued learning. 
+
+* Pull data from an SQL database with the `dbplyr` package. [dbplyr](https://dbplyr.tidyverse.org/)
+
+* Get data from an API endpoint - You can access data available through pretty much any API, or application programming interface, by sending queries and getting back a response, using the excellent [HTTR package](https://httr.r-lib.org/).  An example of an API: [Spotify data](https://developer.spotify.com/documentation/web-api/) 
+
+* Get data from packages the R community has built to load and work with specific kinds of data, including some nice helper functions. If the dataset you want to use is popular, there's a great change someone has built an R package for it! Some great examples:
+  *[Tidycensus](https://walkerke.github.io/tidycensus/index.html): for loading and working with all manner of U.S. Census Data.
+  *[RTweet](https://rtweet.info/): for working with Twitter data
+
+#### Clear enivronment
+
+Before moving on to the data cleaning section, let's clean up all those dataframes in our environment with this handy bit of code. 
+
+```{r}
+rm(list=ls())
+```
+
+#### Data Cleaning 
+
+Data cleaning is a critical step in preparing data for analysis.  Everyone wants to jump right to the fun stuff -- me too! -- but failing to account for flaws in the data can lead to errors, which can lead to corrections.  
+
+To start, we're going to load a dataframe with info on year-by-year totals for the most popular female baby names from 2008 to 2017. 
+
+I've intentionally made this very ugly. Keeping with our theme, someone needs to change this dataframe's diaper!
+
+```{r}
+
+babynames_dirty <- read_rds("../data/babynames_dirty.rds")
+
+```
+
+#### Identify Issues
+
+Examine the data in the environment window.  
+
+What problems do you see? Don't scroll down until you think you've found one or two of the problems. 
+
+
+
+
+
+
+
+
+
+
+Are you sure you can't find more?
+
+
+
+
+
+
+
+
+
+
+
+
+Are you sure? Ok. Here's what I see. 
+
+* EMPTY ROWS - There's a totally empty row of NAs. Let's get rid of it.  It could prevent proper summarizing. 
+* EMPTY COLUMN - There's a totally empty column called source. Let's get rid of it, because it's unneeded. 
+* INCONSISTENT VALUES - The "sex" column has inconsistent values for Female vs F. This could hurt our ability to group and summarize properly. 
+* STYLING INCONSISTENCIES - There are lots of issues in "name_at_birth" column. MADISON is upper. elizabeth is lower. Abigail has "First Name: Abigail" instead of just Abigail. Everything else is title case. This is just...ugly.
+* DUPLICATE ROWS - There are two apparently identical rows for Emma and Amelia (or are they?). We should really only have one, and could lead to misleading summarization if we kept both.
+* NUMBERS STORED AS CHARACTER STRINGS - The 2015 column has a random underscore appended to the end of the number, unlike every other year column. The fact that it's a mix of characters and numbers means the column is stored as a "character", while all of the other year columns are numbers (integers).  If we want to calculate say, the percent change in a name between 2008 and 2015, we'll get an error. 
+* BAD COLUMN NAMES - Less obvious, but still annoying: the fact that the year columns start with a number means they'll be harder to include in our code.
+
+Let's examine each of these, while fixing them. 
+
+Our goal will be one nice long chained function to fix all the problems, so we have a clear record of what we've done.
+
+#### Remove empty rows and columns
+
+First, let's get rid of that totally NA row and column. The `janitor` package has a nice function for getting rid of empty rows and columns
+
+```{r}
+babynames_clean <- babynames_dirty %>%
+  remove_empty()
+
+# just empty rows? remove_empty(which="rows")
+# just empty columns? remove_empty(which="columns")
+# both rows and columns? remove_empty()
+```
+
+#### Remove duplicates
+
+Right now, we have two identical rows with values for "Amelia" and "Emma".  We can remove those by using the `distinct()` function, which looks for duplicate values and keeps only one.
+
+```{r}
+
+babynames_clean <- babynames_dirty %>%
+  remove_empty() %>%
+  distinct()
+
+```
+
+That appears to have removed the duplicate "Amelia" rows, but not the duplicate "Emma" rows.  
+
+Why? 
+
+Before scrolling down, see if you can figure it out. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+If we examine the Emma row closely, we'll see that one has extra whitespace on both sides of the name, and the other doesn't. That means the rows aren't EXACTLY equal.
+
+We can fix that with our first of many string functions, from the `stringr` package, which has lots of helpful functions for cleaning character strings. The function we'll use is called `str_trim()` and it's good at trimming extra whitespace. 
+
+```{r}
+
+babynames_clean <- babynames_dirty %>%
+  remove_empty() %>%
+  mutate(name_at_birth = str_trim(name_at_birth,side="both")) %>%
+  distinct() 
+
+```
+
+Now when we run it again, `distinct()` gets rid of the extra Emma row because the difference has been fixed. 
+
+#### Clean up names column
+
+There are still lots of issues with the "name_at_birth" column.
+
+MADISON is UPPERCASE; elizabeth is lowercase; everything else is Title Case.
+
+Let's fix that first with a function called `str_to_title()`, which will convert everything to title case.
+
+```{r}
+
+babynames_clean <- babynames_dirty %>%
+  remove_empty() %>%
+  mutate(name_at_birth = str_trim(name_at_birth,side="both")) %>%
+  distinct() %>%
+  mutate(name_at_birth = str_to_title(name_at_birth))
+
+```
+
+### Before we move on from names column
+Before we move on, let's suppose we wanted to make all the names lowercase or uppercase instead.  What do we think a function to do that might be called?  If you start typing str_to in the console, you might get a clue. 
+
+### Fixing Abigail
+The next issue will be a bit more challenging, fixing Abigail.  Her name has extra stuff -- "First Name: Abigail" -- that the others don't have.  We can remove that extra stuff with `str_remove()`. 
+
+```{r}
+
+babynames_clean <- babynames_dirty %>%
+  remove_empty() %>%
+  mutate(name_at_birth = str_trim(name_at_birth,side="both")) %>%
+  distinct() %>%
+  mutate(name_at_birth = str_to_title(name_at_birth)) %>%
+  mutate(name_at_birth = str_remove(name_at_birth,"First Name: "))
+
+```
+
+#### Standardize "Sex" Column
+
+We can use one another string function, `str_sub()` to standardize the "sex" column. This function in the block below says, "Starting at the left side of the sex column, keep everything from the first character on the left to...the first character on the left and Get rid of everything else."  
+
+```{r}
+
+
+# The slightly more complex way, to introduce you to string functions
+
+babynames_clean <- babynames_dirty %>%
+  remove_empty() %>%
+  mutate(name_at_birth = str_trim(name_at_birth,side="both")) %>%
+  distinct() %>%
+  mutate(name_at_birth = str_to_title(name_at_birth)) %>%
+  mutate(name_at_birth = str_remove(name_at_birth,"First Name: ")) %>%
+  mutate(sex = str_sub(sex, start=1L, end=1L))
+
+```
+
+### Before we move on from sex
+
+What happens if you change the start and end numbers?  How does the output change? Try it now.
+
+#### Fix 2015 column
+
+The 2015 column is different from the other columns, with an underscore at the end.  If we want to do math to that column, we'll have to fix it.  Here, again, we can use `str_remove()`.
+
+```{r}
+babynames_clean <- babynames_dirty %>%
+  remove_empty() %>%
+  mutate(name_at_birth = str_trim(name_at_birth,side="both")) %>%
+  distinct() %>%
+  mutate(name_at_birth = str_to_title(name_at_birth)) %>%
+  mutate(name_at_birth = str_remove(name_at_birth,"First Name: ")) %>%
+  mutate(sex = str_sub(sex, start=1L, end=1L)) %>%
+  mutate(2015 = str_remove(2015,"_"))
+```
+
+But we get an error!  Why? Because R hates it when you start column names with numbers.  You could wrap it in tick marks when you use it, like `2015`, but that's pretty annoying.
+
+Instead, we can use the helpful `clean_names()` function from the `janitor` package to standardize it.  If our column names had spaces, or capital letters, it would fix that too. 
+
+```{r}
+babynames_clean <- babynames_dirty %>%
+  remove_empty() %>%
+  mutate(name_at_birth = str_trim(name_at_birth,side="both")) %>%
+  distinct() %>%
+  mutate(name_at_birth = str_to_title(name_at_birth)) %>%
+  mutate(name_at_birth = str_remove(name_at_birth,"First Name: ")) %>%
+  mutate(sex = str_sub(sex, start=1L, end=1L)) %>%
+  clean_names()
+```
+
+It puts an x at the start of the name, so now we can get to cleaning 2015. 
+
+```{r}
+babynames_clean <- babynames_dirty %>%
+  remove_empty() %>%
+  mutate(name_at_birth = str_trim(name_at_birth,side="both")) %>%
+  distinct() %>%
+  mutate(name_at_birth = str_to_title(name_at_birth)) %>%
+  mutate(name_at_birth = str_remove(name_at_birth,"First Name: ")) %>%
+  mutate(sex = str_sub(sex, start=1L, end=1L)) %>%
+  clean_names() %>%
+  mutate(x2015 = str_remove(x2015,"_"))
+```
+
+Okay, it looks like a proper number now.  But if we look under the hood, at the data type of each column, we'll see it hasn't been fixed. We can do that with `glimpse()`
+
+```{r}
+glimpse(babynames_clean)
+```
+
+x2015 is still a "character". If we try to do math to it, it will error.  So let's change the datatype to a number using `as.integer()`. 
+
+```{r}
+babynames_clean <- babynames_dirty %>%
+  remove_empty() %>%
+  mutate(name_at_birth = str_trim(name_at_birth,side="both")) %>%
+  distinct() %>%
+  mutate(name_at_birth = str_to_title(name_at_birth)) %>%
+  mutate(name_at_birth = str_remove(name_at_birth,"First Name: ")) %>%
+  mutate(sex = str_sub(sex, start=1L, end=1L)) %>%
+  clean_names() %>%
+  mutate(x2015 = str_remove(x2015,"_")) %>%
+  mutate(x2015 = as.integer(x2015))
+```
+
+When we glimpse the data, it's been converted to the correct datatype.
+
+```{r}
+glimpse(babynames_clean)
+```
+
+#### Final Practice
+
+If there's time left over, there's a dataset called tenn_gva.csv in the data folder that you can use to practice your new data cleaning skills. 
+
+Write code to load the data, identify potential issues, then write code to fix them.
+
+```{r}
+
+
+```
+
+
+Thanks for joining.  If you get stuck in the future and need some help, I'm at smussend@umd.edu. 
