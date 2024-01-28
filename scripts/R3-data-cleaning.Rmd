@@ -1,0 +1,238 @@
+---
+title: 'Data cleaning: reformatting and reshaping'
+author: "Liz Lucas, IRE"
+output: html_document
+---
+
+Load necessary packages:
+
+```{r}
+library(tidyverse) # we'll be using mostly tidyr and stringr packages within the tidyverse
+library(lubridate) # this package allows us to manipulate dates
+```
+
+The data used for these examples: campfin/transactions.csv, disney.csv, osha.csv, poverty_original.csv
+
+A note about disney.csv: this csv file lives in a GitHub repository, just like the one we have for this bootcamp. You can import csv files on the web directly into R by putting the URL that points to the csv into `read_csv()`. This is true for any csv that lives on a website.
+
+```{r}
+transactions <- read_csv("../data/transactions.csv")
+disney <- read_csv("../data/disney_movies_total_gross.csv")
+osha <- read_csv("../data/osha.csv")
+poverty <- read_csv("../data/poverty_original.csv")
+```
+
+#### Converting dates and numbers
+
+We'll start with `transactions` from yesterday's campaign finance exercise.
+
+```{r}
+glimpse(transactions)
+```
+
+The date is formatted in such a way that R imported it as a character: MMDDYYYY. To truly work with it as a date, we need it in date format. There is a package called `lubridate` that we imported above that will help you work with dates. We'll take a look at the [lubridate cheatsheet](https://github.com/ireapps/R-for-data-analysis-2022/blob/main/docs/lubridate.pdf) to search for the right function.
+
+It's `mdy()`. When you're going to make a transformation, I recommend 1) testing it out first, and 2) creating a new column with the transformed data.
+
+```{r}
+# test it out
+transactions %>% mutate(new_dt = mdy(transaction_dt)) %>% select(transaction_dt, new_dt)
+
+# make it permanent (in a new column)
+transactions <- transactions %>% mutate(new_dt = mdy(transaction_dt), .after=transaction_dt)
+```
+
+Now that we've got a working date field, we can use other functions from lubridate to analyze the data, such as asking: in which year was most of the money spent?
+
+```{r}
+transactions %>% 
+  group_by(year(new_dt)) %>% 
+  summarise(total = sum(transaction_amt))
+```
+
+You could also use the `month()` function to further break it down by month:
+
+```{r}
+transactions %>% 
+  group_by(year(new_dt), month(new_dt)) %>% 
+  summarise(total = sum(transaction_amt))
+```
+
+Try breaking it down by `quarter()`:
+
+```{r}
+transactions %>% 
+  group_by(year = year(new_dt), quarter = quarter(new_dt)) %>% 
+  summarise(total = sum(transaction_amt))
+```
+
+Next, take a look at the `disney` file.
+
+```{r}
+glimpse(disney)
+```
+
+There are a bunch of issues with the formatting in this dataset: the dates are imported as text because they're written out, and the `total_gross` and `inflation_adjusted_gross` are both appearing as numbers because they were imported with dollar signs and commas. To start, let's deal with dates. The beauty of the aforementioned `mdy()` function is that it recognizes a lot of different formats, so long as the order of the components is the same. Try it here on the `release_date` column:
+
+```{r}
+disney %>% 
+  mutate(new_dt = mdy(release_date)) %>% 
+  select(new_dt, release_date)
+```
+
+See, it works! Let's go ahead and make that new column permanent:
+
+```{r}
+disney <- disney %>% mutate(new_dt = mdy(release_date), .after=release_date)
+```
+
+Now to the numbers columns: `total_gross` and `inflation_adjusted_gross`. There's a function in `tidyverse` that comes from the `readr` package called `parse_number()` that will do all the work for you. See it in action:
+
+```{r}
+disney %>% mutate(new_total_gross = parse_number(total_gross)) %>% select(total_gross, new_total_gross)
+```
+
+Great. Now let's create two new columns:
+
+```{r}
+disney <- disney %>% mutate(new_total_gross = parse_number(total_gross), 
+                            new_adjusted_gross = parse_number(inflation_adjusted_gross))
+```
+
+Now you you can ask, in inflation-adjusted dollars, which disney movie is the highest-grossing movie of all time?
+
+```{r}
+disney %>% arrange(desc(new_adjusted_gross))
+```
+
+### Adding description columns
+
+Next we'll take a look at `osha`.
+
+```{r}
+glimpse(osha)
+```
+
+If you look through the [documentation](https://www.osha.gov/sites/default/files/ITA_Data_Dictionary.pdf) for this dataset, you'll notice that some of these fields are coded, such as `size` and `establishment_type`. For columns that have many value options, we might want to join to a lookup table. But for just a few values, we can add a `_desc` column into our data and code in values based on the original column.
+
+We'll add an `estab_type_desc` column based on the values in `establishment_type`, using a function called `case_when()`. This is something like an `if` or `ifelse` statement:
+
+```{r}
+# test it out
+osha %>% mutate(estab_type_desc = case_when(
+  establishment_type==1 ~ "Not a Government Entity",
+  establishment_type==2 ~ "State Government Entity",
+  establishment_type==3 ~ "Local Government Entity",
+  TRUE ~ "Error"
+)) %>% 
+  count(establishment_type, estab_type_desc)
+
+# make it permanent
+osha <- osha %>% mutate(estab_type_desc = case_when(
+  establishment_type==1 ~ "Not a Government Entity",
+  establishment_type==2 ~ "State Government Entity",
+  establishment_type==3 ~ "Local Government Entity",
+  TRUE ~ "Error"
+))
+```
+
+### Working with strings
+
+For this exercise, we'll use `poverty`, which is the original file that I got from the Census Bureau. I cleaned it up using several techniques that I'll share here.
+
+```{r}
+glimpse(poverty)
+```
+
+First, let's do some string manipulation. There are many many things you can do to manipulate strings with the `stringr` package (included in `tidyverse`). [See the cheat sheet](https://github.com/ireapps/R-for-data-analysis-2022/blob/main/docs/strings.pdf).
+
+I'll highlight a few. First, take a look at the `GEOID` column. This is a FIPS code column, standard in Census datasets, but it's a universal numbering system that identifies different geographies. The first two numbers of this FIPS code is the state FIPS, and the last three are the county FIPS. You can use these to easily join tables with other data that includes FIPS, without having to worry about whether the states and counties are spelled or represented exactly the same way.
+
+Start by pulling out the first two numbers for the state FIPS, using the `str_sub()` function, which is one function you can use to subset strings:
+
+```{r}
+?str_sub
+
+# arguments: (string to parse, start position, stop position)
+
+str_sub(poverty$GEOID, 1, 2)
+
+# test it out with mutate()
+poverty %>% mutate(state_FIPS = str_sub(GEOID,1,2), .after=GEOID)
+
+# create a new column
+poverty <- poverty %>% mutate(state_FIPS = str_sub(GEOID,1,2), .after=GEOID)
+```
+
+Now try it out on the county FIPS:
+
+```{r}
+# test it out with mutate()
+poverty %>% mutate(county_FIPS = str_sub(GEOID,3,5), .after=GEOID)
+
+# create a new column
+poverty <- poverty %>% mutate(county_FIPS = str_sub(GEOID,3,5), .after=GEOID)
+
+```
+
+Great. One last string to manipulate here, and that is the `NAME` column. In the data we worked with eariler this week, I had separated out county and state names to make it easier to work with. I did this using the `separate()` function, which allows you to split a column into multiple columns based on a delimiter:
+
+```{r}
+?separate
+```
+
+Note that you can identify a separator with the `sep =` argument; you can decide whether to remove the original column with the `remove =` argument (the default is TRUE).
+
+```{r}
+# test it out
+poverty %>% separate(NAME, into=c("county","state"), sep=", ")
+
+# try it with 'remove = FALSE'
+poverty %>% separate(NAME, into=c("county","state"), sep=", ", remove = FALSE)
+```
+
+Now make it permanent
+
+```{r}
+poverty <- poverty %>% separate(NAME, into=c("county","state"), sep=", ", remove = FALSE)
+```
+
+There are many things you can do with `stringr`. Here are a few more examples:
+
+```{r}
+# join strings together
+poverty %>% mutate(county_state = str_c(county, ", ", state)) %>% select(county, state, county_state)
+
+# make all upper case
+poverty %>% mutate(COUNTY = str_to_upper(county)) %>% select(county, COUNTY)
+
+# make all lower case
+poverty %>% mutate(county_lower = str_to_lower(county)) %>% select(county, county_lower)
+
+# replace all instances of a string (in this case you should keep in mind that there are Parishes and Cities and Municipios as well)
+poverty %>% mutate(new_county = str_replace(county, " County", "")) %>% select(county, new_county)
+
+```
+
+### Reshaping data
+
+There's one last thing to do to the `poverty` table. In this example, each variable (i.e. `below50`, `below125`, etc) is its own row. To make it easier to do calculations by county, I transposed this data so that each variable would be its own column rather than row. I did that using `pivot_wider()` (for the sake of this example, I'm going to exclude the margin of error, or `moe`).
+
+```{r}
+poverty %>% 
+  select(-moe) %>% 
+  pivot_wider(names_from=variable, values_from=estimate)
+```
+
+There is a function called `pivot_longer()` that does the opposite:
+
+```{r}
+# First I'll create a new variable with the wider data:
+poverty_wide <- poverty %>% 
+  select(-moe) %>% 
+  pivot_wider(names_from=variable, values_from=estimate)
+
+# Then I'll turn it back to long using pivot_longer()
+poverty_wide %>% pivot_longer(cols = population:below500, names_to="variable", values_to="estimate")
+
+```
