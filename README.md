@@ -32,7 +32,7 @@ At the end of this session participants should be able to do the following:
 
 - R1-1-intro-to-r-and-rstudio.Rmd
 - R1-2-analysis-of-salaries-R1.Rmd
-- R1-3analysis-of-babynames-R1.Rmd
+- R1-3-analysis-of-babynames-R1.Rmd
 
 ## R 2: Data analysis and plotting
 

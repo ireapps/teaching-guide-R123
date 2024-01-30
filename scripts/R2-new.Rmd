@@ -1,0 +1,191 @@
+---
+title: "R2 Notebook"
+output: html_notebook
+---
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(janitor)
+```
+
+
+## Import
+
+There are several important concepts to explain here that are core to the tidyverse way of using R.
+
+> Come back and fill this.
+
+- objects
+- functions
+- arguments
+- pipes
+
+```{r}
+balt <- read_csv("../data/wx_baltimore.csv") |> clean_names()
+# nash <- read_csv("../data/wx_nashville.csv") |> clean_names()
+# minn <- read_csv("../data/wx_minneapolis.csv") |> clean_names()
+```
+
+## Inspect your file
+
+### slice()
+
+Look at the head, tail or sample of a file with [`slice()`](https://dplyr.tidyverse.org/reference/slice.html).
+
+```{r}
+balt |> slice_sample(n = 5)
+```
+
+### glimpse()
+
+Let's you see all the column names and types at once.
+
+```{r}
+balt |> glimpse()
+```
+
+### summary()
+
+Good for highest/lowest values, means, etc.
+
+```{r}
+balt |> summary()
+```
+
+## Manage columns and rows
+
+### select()
+
+[`select()`](https://dplyr.tidyverse.org/reference/select.html) allows you to specify columns to keep or exclude.
+
+Let's get just our columns of interest. We create a new object and set it to the result of our data AND THEN select specific columns.
+
+```{r}
+balt_cols <- balt |> 
+  select(
+    date,
+    prcp,
+    snow,
+    snwd,
+    tmax,
+    tmin
+  )
+
+balt_cols
+```
+
+There are lots of fancy ways to choose columns in `select()`, like `starts_with()`
+
+### arrange()
+
+Sort columns with [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html)
+
+QUESTION: Which day got the most rain in Baltimore?
+
+Arrange rows by `prcp` in descending order.
+
+```{r}
+balt_cols |> 
+  arrange(desc(prcp))
+```
+
+### filter()
+
+Choose specific rows based on a condition.
+
+QUESTION: How many days has it snowed in Baltimore since July 1939?
+
+```{r}
+balt_cols |> 
+  filter(snow > 0)
+```
+
+We get our answer with the number of rows left, though that's kinda wonky. We can do better.
+
+## Summarizing data
+
+Use `summarise()` to apply summary functions to a column in your data. `summarise()` will reduce a bunch of data to one number (a summary). You can do summarise an entire column or summarise groups by using the `group_by()` function (we'll talk about that next). Note that since the tidyverse was primarily written by a New Zealander you'll often see summarise spelled with an s, but you can also spell it with a z.
+
+### summarize()
+
+QUESTION: What is the average daily high and low temperature in our data?
+
+```{r}
+balt_cols |> 
+  summarise(
+    avg_high = mean(tmax),
+    avg_low = mean(tmin),
+    number_days = n()
+  )
+```
+But that is less useful. How about we get those averages by year?
+
+### group_by()
+
+We can solve a lot of data challenges our rows of data into groups before summarizing.
+
+QUESTION: What is the average daily high and low for each year?
+
+Here we will group by the "year" of the date. As we do that, we name the new column. In R, we usually name things before we give it a value. You can't fill a bucket with water until you first have a bucket.
+
+```{r}
+balt_cols |> 
+  group_by(yr = year(date)) |> 
+  summarise(
+    avg_high = mean(tmax),
+    avg_low = mean(tmin),
+    number_days = n()
+  )
+```
+
+## Plotting our results
+
+[`ggplot2()`](https://ggplot2.tidyverse.org/) is the charting workhorse for R. In some ways, all the tidyverse tools are designed to prepare data to plot with this package.
+
+The concept is to create charts by describing how to build it layer by layer. We do this with the "grammar of graphics", the gg in ggplot.
+
+We typically want to summarize our data first like we have above before we plot it. We also need to envision what we want our chart to look like so we can prepare that data in the ways that benefit ggplot the best. There can be a LOT of trial and error to this, both in preparing the data just right, and futzing with the chart to make it look it's best.
+
+In this next example, we will jump past the learning and fiddling and just include short comments why things are the way they are.
+
+We are going to rework our data above a bit, creating a "floor date" instead of year, because it will chart better. We also filter out the incomplete years.
+
+```{r}
+avg_temps <- balt_cols |> 
+  mutate(fl_yr = floor_date(date, unit = "year")) |> 
+  filter(year(fl_yr) >= 1940, year(fl_yr) <= 2023) |> 
+  group_by(fl_yr) |> 
+  summarise(
+    avg_high = mean(tmax),
+    avg_low = mean(tmin)
+  )
+
+avg_temps
+```
+
+Now we could chart this with the data above, adding one line at a time.
+
+```{r}
+avg_temps |> 
+  ggplot(aes(x = fl_yr)) +
+  geom_line(aes(y = avg_high), color = "red") +
+  geom_line(aes(y = avg_low), color = "blue") +
+  geom_smooth(aes(y = avg_high)) +
+  geom_smooth(aes(y = avg_low)) +
+  labs(
+    title = "Average yearly high and lows: Baltimore"
+  )
+```
+
+
+
+
+
+
+
+
+
