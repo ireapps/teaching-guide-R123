@@ -1,0 +1,174 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+## The whole game: Denied
+
+Our goal here is to see how the rate of students in special education has changed over time in Texas. The code below has very light explanation, but you can see more detail in the "Denied" chapters in [Reporting with Data in R](https://utdata.github.io/rwdir/denied-cleaning.html), which follows up on a 2016 story from the Houston Chronicle.
+
+Here we'll import multiple files and stack them, join those with a reference table, do some filtering, summarize some values and then map the result.
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(janitor)
+```
+
+
+## Import multiple files
+
+We have special education rates per district for an 11-year span. We want to build a "list" of the file names, then iterate over that list to import and join them.
+
+```{r}
+dstud_files <- list.files(
+  "../data",
+  pattern = "DSTUD",
+  full.names = TRUE
+)
+
+dstud_files
+```
+
+Now we capture the names of the files with `set_names()` and then use map to apply the `read_csv()` function build a list of data frames from each file. We then use `list_bind()` to put them together.
+
+I slice the "head" and "tail" of the combine file to show there is a difference in the `district` column where the `'` was added to ensure the ID is a text value.
+
+```{r}
+dstud_raw <- dstud_files |>
+  set_names(basename) |>
+  map(
+    read_csv,
+    col_select = c(DISTRICT, DPETALLC, DPETSPEC, DPETSPEP)
+  ) |> 
+  list_rbind(names_to = "source") |>
+  clean_names()
+
+dstud_raw |> slice_head(n = 5)
+dstud_raw |> slice_tail(n = 5)
+```
+
+Now to clean up that district column and use the file name in our source column to build a year of the record.
+
+```{r}
+dstud <- dstud_raw |>
+  mutate(
+    district = str_remove(district, "'"), # removes the apostrophe
+    year = str_c("20", str_sub(source, 7, 8)) # Create year from file name
+  ) |> 
+  select(!source) # remove old column
+
+dstud |> glimpse()
+```
+
+## The reference file
+
+### Import the file
+
+```{r}
+dref_raw <- read_csv(
+  "../data/DREF_22.csv",
+  col_select = c(
+    DISTRICT,
+    CNTYNAME,
+    DISTNAME,
+    DFLCHART,
+    DFLALTED
+    )
+  ) |> 
+  clean_names()
+
+dref_raw |> slice(1:5)
+```
+
+Select columns of interest and fix the district value to remove apostrophe.
+
+```{r}
+dref <- dref_raw |> 
+  select(district, distname, cntyname, dflalted, dflchart) |> 
+  mutate(district = str_remove(district, "'"))
+
+dref |> slice(1:5)
+```
+
+## Join the files together
+
+```{r}
+sped_joined <- dref |>
+  inner_join(dstud, by = "district")
+
+sped_joined |> slice(1:5)
+```
+
+### Filter and focus
+
+We are removing charter and alternative education districts, selecting our main columns of interest while also renaming some of them to be more understandable.
+
+```{r}
+sped <- sped_joined |> 
+  filter(dflalted == "N" & dflchart == "N") |> 
+  select(
+    district,
+    distname,
+    cntyname,
+    year,
+    all_count = dpetallc,
+    sped_count = dpetspec,
+    sped_percent = dpetspep
+  )
+
+sped |> slice(1:5)
+```
+
+## Summarize statewide data
+
+We use the count of all student and special education students in these schools to create a state-wide rate.
+
+```{r}
+yearly_percent <- sped |> 
+  group_by(year) |> 
+  summarise(
+    total_students = sum(all_count),
+    total_sped = sum(sped_count)
+  ) |> 
+  mutate(sped_percent = ((total_sped / total_students) * 100) |> round(1))
+
+yearly_percent
+```
+
+### Plot statewide data
+
+Now we plot that data as a column chart
+
+```{r}
+yearly_percent |>
+  ggplot(aes(x = year, y = sped_percent)) +
+  geom_col(fill = "cadetblue") +
+  geom_text(aes(label = sped_percent, vjust = -.5)) +
+  ylim(0,13) +
+  labs(
+    title = "Special education rates rise after rule change",
+    subtitle = str_wrap("After 2016 reports highlighting a Texas Education Agency benchmark for special education, the Texas Legislature banned the practice and increased funding for programs."),
+    x = "", y = "% of students in special education",
+    caption = "By Christian McDonald; Source: Texas Education Agency"
+  )
+```
+
+### Plot local districts
+
+Let's look at some individual districts in the Austin area to make sure the trend tracks.
+
+```{r}
+sped |> 
+  filter(cntyname == "TRAVIS" & distname != "UNIVERSITY OF TEXAS AT AUSTIN H S") |> 
+  ggplot(aes(x = year, y = sped_percent, group = distname)) +
+  geom_line(aes(color = distname))
+```
+

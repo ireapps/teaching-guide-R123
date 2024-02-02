@@ -1,12 +1,19 @@
 ---
 title: "R2 Notebook"
-output: html_notebook
+author: "Christian McDonald"
+output:
+  html_document:
+    df_print: paged
 ---
+
+## Goals of this notebook
+
+Possible lesson change for 2024. Under development.
 
 ```{r}
 #| label: setup
-#| message: false
 #| warning: false
+#| message: false
 
 library(tidyverse)
 library(janitor)
@@ -17,17 +24,22 @@ library(janitor)
 
 There are several important concepts to explain here that are core to the tidyverse way of using R.
 
-> Come back and fill this.
+> Come back and flesh this out
 
 - objects
 - functions
 - arguments
 - pipes
 
+
 ```{r}
+
 balt <- read_csv("../data/wx_baltimore.csv") |> clean_names()
-# nash <- read_csv("../data/wx_nashville.csv") |> clean_names()
-# minn <- read_csv("../data/wx_minneapolis.csv") |> clean_names()
+nash <- read_csv("../data/wx_nashville.csv") |> clean_names()
+minn <- read_csv("../data/wx_minneapolis.csv") |> clean_names()
+dref <- read_csv("../data/DREF_22.csv") |> clean_names()
+dstud <- read_csv("../data/DSTUD_22.csv",
+                  col_select = c(DISTRICT, DPETALLC, DPETSPEC, DPETSPEP)) |> clean_names()
 ```
 
 ## Inspect your file
@@ -35,6 +47,8 @@ balt <- read_csv("../data/wx_baltimore.csv") |> clean_names()
 ### slice()
 
 Look at the head, tail or sample of a file with [`slice()`](https://dplyr.tidyverse.org/reference/slice.html).
+
+> Describe all of them.
 
 ```{r}
 balt |> slice_sample(n = 5)
@@ -181,11 +195,143 @@ avg_temps |>
   )
 ```
 
+### Pivoting
+
+A more "tidy" way of doing this would be to pivot our data first so we have variable with a temperature and a variable that describes if it is high or low.
+
+```{r}
+avg_temps_pivot <- avg_temps |> 
+  rename(
+    year = fl_yr,
+    High = avg_high,
+    Low = avg_low
+    ) |> 
+  pivot_longer(
+    cols = High:Low,
+    names_to = "type",
+    values_to = "temp"
+  )
+
+avg_temps_pivot
+```
+
+And then plot:
+
+```{r}
+avg_temps_pivot |> 
+  ggplot(aes(x = year, y = temp, color = type)) +
+  geom_line() +
+  geom_smooth() +
+  labs(
+    title = "Yearly average high and low temperatures: Baltimore",
+    caption = "Source: Global Historical Climate Network",
+    x = "", # removes axis label
+    y = "Yearly average temperature", # renames axis label
+    color = "" # remove legend header
+  )
+```
+
+## Bind rows
+
+When we want to stack similar data frames on top of each other, we can use `bind_rows()`. (There is also bind_cols.)
+
+```{r}
+wx_bind <-  bind_rows(balt, minn, nash)
+
+# showing we have all three
+wx_bind |> count(name)
+```
+
+### Recategorize values
+
+We create short city names instead of the long station names, then reselect our most important data.
+
+```{r}
+wx_combo <- wx_bind |> 
+  mutate(city = case_match(
+    name, 
+    "BALTIMORE WASHINGTON INTERNATIONAL AIRPORT, MD US" ~ "Baltimore",
+    "MINNEAPOLIS ST. PAUL INTERNATIONAL AIRPORT, MN US" ~ "Minneapolis",
+    "NASHVILLE INTERNATIONAL AIRPORT, TN US" ~ "Nashville"
+  )) |> 
+  select(date, city, prcp, snow, snwd, tmax, tmin)
+```
+
+You can do more complex categorization with [case_when()](https://dplyr.tidyverse.org/reference/case_when.html).
+
+## Joins
+
+Tidyverse has very SQL-like [joins](https://dplyr.tidyverse.org/reference/mutate-joins.html), including inner, left, etc.
+
+Joins adds columns from one data set to another based on matching values in each data set.
+
+- Left joins keep everything from the first data set noted, and drops data from the "right" table if there is not match. A right join does the opposite.
+- An inner join keeps only rows where there is a match in both tables.
+
+![Join Types](images/join_types.png)
+
+### Inspect the files
+
+In this example we have a dataset the number of students special education for each district, but the file has a code value for the district instead of the name.
+
+There is 1200 rows in each of these data sets, but we'll just peek at the first five rows.
+
+```{r}
+dstud |> slice(1:5)
+```
+
+But we have a reference table that has the district names:
+
+```{r}
+dref |> slice(1:5)
+```
+
+### Specify the join
+
+We can start with the reference data and then "join" the special education counts to it.
+
+```{r}
+dcombo <- dref |> inner_join(dstud, join_by(district))
+
+dcombo |> slice(1:5)
+```
+
+Those two data frames would've joined on the `district` variable without specifying them since they are named the same, but it is best to specify your matching columns with [`join_by()`](https://dplyr.tidyverse.org/reference/mutate-joins.html).
+
+### Focus the data
+
+Now we'll remove some of the columns we don't need using negate `!` with `select()`.
+
+```{r}
+d_sped <- dcombo |> 
+  select(!c(district, county))
+
+d_sped |> slice(1:5)
+```
+
+### Filter and plot
+
+We're going to do this in one fell swoop
 
 
+```{r}
 
+dist_local <- c(
+    "AUSTIN ISD",
+    "ROUND ROCK ISD",
+    "HAYS CISD",
+    "BASTROP ISD"
+  )
 
-
-
-
+d_sped |> 
+  filter(distname %in% dist_local) |> 
+  ggplot(aes(x = reorder(distname,dpetspep), y = dpetspep)) +
+  geom_col() +
+  geom_text(aes(label = dpetspep), vjust = -1) +
+  labs(
+    title = "Percentage of students in special education, 2023",
+    x = "District", y = "Percentage in special education"
+  ) +
+  ylim(0, 16)
+```
 
