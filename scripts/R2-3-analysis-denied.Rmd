@@ -23,9 +23,11 @@ library(janitor)
 ```
 
 
-## Import multiple files
+## Importing multiple files at once
 
-We have special education rates per district for an 11-year span. We want to build a "list" of the file names, then iterate over that list to import and join them.
+### Build a list of files
+
+We have special education rates per district for an 10-year span. We want to build a "list" of the file names, then iterate over that list to import and join them.
 
 ```{r}
 dstud_files <- list.files(
@@ -37,7 +39,9 @@ dstud_files <- list.files(
 dstud_files
 ```
 
-Now we capture the names of the files with `set_names()` and then use map to apply the `read_csv()` function build a list of data frames from each file. We then use `list_bind()` to put them together.
+### Read and combine
+
+Now we capture the names of the files with `set_names()` and then use map to apply the `read_csv()` function and build a list of data frames from each file. We then use `list_bind()` to put them together.
 
 I slice the "head" and "tail" of the combine file to show there is a difference in the `district` column where the `'` was added to ensure the ID is a text value.
 
@@ -55,6 +59,8 @@ dstud_raw |> slice_head(n = 5)
 dstud_raw |> slice_tail(n = 5)
 ```
 
+### Some cleanup of columns
+
 Now to clean up that district column and use the file name in our source column to build a year of the record.
 
 ```{r}
@@ -68,9 +74,11 @@ dstud <- dstud_raw |>
 dstud |> glimpse()
 ```
 
-## The reference file
+## Joining files together
 
-### Import the file
+Our data does not have district names, but we'll fix that by joining with a reference file.
+
+### Import our reference file
 
 ```{r}
 dref_raw <- read_csv(
@@ -98,7 +106,7 @@ dref <- dref_raw |>
 dref |> slice(1:5)
 ```
 
-## Join the files together
+### Join the files together
 
 ```{r}
 sped_joined <- dref |>
@@ -109,7 +117,7 @@ sped_joined |> slice(1:5)
 
 ### Filter and focus
 
-We are removing charter and alternative education districts, selecting our main columns of interest while also renaming some of them to be more understandable.
+In a choice to focus on traditional public schools, filter out charter and alternative education districts. We then select our main columns of interest while also renaming some of them to be more understandable.
 
 ```{r}
 sped <- sped_joined |> 
@@ -129,7 +137,7 @@ sped |> slice(1:5)
 
 ## Summarize statewide data
 
-We use the count of all student and special education students in these schools to create a state-wide rate.
+We will use the count of all student and special education students in these districts to create a state-wide rate for traditional public schools.
 
 ```{r}
 yearly_percent <- sped |> 
@@ -161,14 +169,18 @@ yearly_percent |>
   )
 ```
 
-### Plot local districts
+## Plot local districts
 
-Let's look at some individual districts in the Austin area to make sure the trend tracks.
+Let's look at some individual districts in the Austin area to make sure the trend tracks. There actually isn't any more data prep do do here ... just filter for districts of interest plot them. We exclude one district that is really a public charter school.
 
 ```{r}
 sped |> 
   filter(cntyname == "TRAVIS" & distname != "UNIVERSITY OF TEXAS AT AUSTIN H S") |> 
   ggplot(aes(x = year, y = sped_percent, group = distname)) +
-  geom_line(aes(color = distname))
+  geom_line(aes(color = distname)) +
+  labs(
+    title = "Special education rates for Travis County area schools",
+    x = "", y = "% in special education"
+  )
 ```
 

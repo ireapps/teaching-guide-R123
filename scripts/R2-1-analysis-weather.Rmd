@@ -8,7 +8,21 @@ output:
 
 ## Goals of this notebook
 
-Possible lesson change for 2024. Under development.
+This is part two of a three-part series of classes introducing R data workflows. 
+
+If you're familiar with spreadsheets and/or SQL, you'll recognize these functions: they represent the some of the fundamental processes of data analyses in many programs.
+
+We'll use the tidyverse packages dplyr and ggplot2, learning how to sort, filter, group, summarize, join, and visualize to identify trends in your data.
+
+We may not get through the whole notebook and may jump to some sections of interest.
+
+## Setup
+
+Convention is to put all the libraries used at the top of a notebook or script.
+
+The `tidyverse` library is actually a collection of libraries that are designed to work together.
+
+The `janitor` library has some functions to help clean data that we will use.
 
 ```{r}
 #| label: setup
@@ -24,62 +38,78 @@ library(janitor)
 
 There are several important concepts to explain here that are core to the tidyverse way of using R.
 
-> Come back and flesh this out
+Looking at the first line:
 
-- objects
-- functions
-- arguments
-- pipes
+- `balt_raw` is an R *object* that we create so we can then fill it with data using the `<-` operator. An object is a stored value in R that can be reused. Like in some other languages, convention is to first substantiate the object, and then fill it with a value. I like to day you have to have a bucket before you can fill it with water.
+- `read_csv()` is a *function.* Functions are our verbs in R ... they do things. They are typically named for what they do.
+- Inside of the function, in this case a path to our file in quotes, are *arguments.* Arguments are specific to functions and they might have defaults you can overwrite explicitly.
+- The `|>` is a *pipe*, which you might also see written at `%>%`. A pipe takes the result of one function and "pipes" it into the next function. This allows us to write our code in an understandable fashion.
 
+We are importing a bunch of files that we'll use in this lesson. The function `clean_names()` normalizes the variable names to lowercase with `_` instead of spaces. 
+For the `dstud_raw` import we have an additional argument that choose which columns to import.
 
 ```{r}
 
-balt <- read_csv("../data/wx_baltimore.csv") |> clean_names()
-nash <- read_csv("../data/wx_nashville.csv") |> clean_names()
-minn <- read_csv("../data/wx_minneapolis.csv") |> clean_names()
-dref <- read_csv("../data/DREF_22.csv") |> clean_names()
-dstud <- read_csv("../data/DSTUD_22.csv",
+balt_raw <- read_csv("../data/wx_baltimore.csv") |> clean_names()
+nash_raw <- read_csv("../data/wx_nashville.csv") |> clean_names()
+minn_raw <- read_csv("../data/wx_minneapolis.csv") |> clean_names()
+dref_raw <- read_csv("../data/DREF_22.csv") |> clean_names()
+dstud_raw <- read_csv("../data/DSTUD_22.csv",
                   col_select = c(DISTRICT, DPETALLC, DPETSPEC, DPETSPEP)) |> clean_names()
 ```
 
+When I import a file I usually keep it's original state so I can refer to it, which is why I've called these `_raw`.
+
 ## Inspect your file
+
+We'll look at different ways to explore your data. If folks are comfortable with these, we may skip ahead.
 
 ### slice()
 
-Look at the head, tail or sample of a file with [`slice()`](https://dplyr.tidyverse.org/reference/slice.html).
+Throughout this lesson we'll peek at parts of files using a variation of  [`slice()`](https://dplyr.tidyverse.org/reference/slice.html), where you can choose which part of a file too look at by their row value, like `slice(1:5)` looks at the first five lines. There is also `slice_head()` and `slice_tail()`
 
-> Describe all of them.
+Here we get five random rows from our data with `slice_sample()`.
 
 ```{r}
-balt |> slice_sample(n = 5)
+balt_raw |> slice_sample(n = 5)
 ```
+
+You might also see base R versions of these: `head()` and `tail()`. Those are also fine ... I'm just using tidyverse versions for consistency.
 
 ### glimpse()
 
 Let's you see all the column names and types at once.
 
 ```{r}
-balt |> glimpse()
+balt_raw |> glimpse()
 ```
 
 ### summary()
 
-Good for highest/lowest values, means, etc.
+A summary is useful to see highest/lowest values, means, etc.
 
 ```{r}
-balt |> summary()
+balt_raw |> summary()
+```
+
+I often use summary to check the range of dates in a file. You can select a single column like this:
+
+```{r}
+balt_raw$date |> summary()
 ```
 
 ## Manage columns and rows
 
 ### select()
 
+Each row of our data is a summary from a specific day. We only want some of these variables: the date, rain (prcp), snow in inches, snow depth (snwd), high temperature (tmax) and low temperature (tmin).
+
 [`select()`](https://dplyr.tidyverse.org/reference/select.html) allows you to specify columns to keep or exclude.
 
-Let's get just our columns of interest. We create a new object and set it to the result of our data AND THEN select specific columns.
+Let's select just our columns of interest. We create a new object `balt` and set it to the result of our data AND THEN select specific columns.
 
 ```{r}
-balt_cols <- balt |> 
+balt <- balt_raw |> 
   select(
     date,
     prcp,
@@ -89,10 +119,12 @@ balt_cols <- balt |>
     tmin
   )
 
-balt_cols
+balt
 ```
 
 There are lots of fancy ways to choose columns in `select()`, like `starts_with()`
+
+You'll notice I put the list of files inside the select on separate lines. That is not necessary, but I find it much easier to read that way.
 
 ### arrange()
 
@@ -103,8 +135,14 @@ QUESTION: Which day got the most rain in Baltimore?
 Arrange rows by `prcp` in descending order.
 
 ```{r}
-balt_cols |> 
+balt |> 
   arrange(desc(prcp))
+```
+
+👉 YOUR TURN: What was the hottest day in Baltimore history?
+
+```{r}
+balt
 ```
 
 ### filter()
@@ -114,7 +152,7 @@ Choose specific rows based on a condition.
 QUESTION: How many days has it snowed in Baltimore since July 1939?
 
 ```{r}
-balt_cols |> 
+balt |> 
   filter(snow > 0)
 ```
 
@@ -128,15 +166,18 @@ Use `summarise()` to apply summary functions to a column in your data. `summaris
 
 QUESTION: What is the average daily high and low temperature in our data?
 
+In typical R fashion, we name the thing we are creating before filling it. `avg_high` is just the name of the new column .. and `mean(tmax)` is the value we are filling it with.
+
 ```{r}
-balt_cols |> 
+balt |> 
   summarise(
     avg_high = mean(tmax),
     avg_low = mean(tmin),
     number_days = n()
   )
 ```
-But that is less useful. How about we get those averages by year?
+
+OK, but how about we get those averages by year?
 
 ### group_by()
 
@@ -147,7 +188,7 @@ QUESTION: What is the average daily high and low for each year?
 Here we will group by the "year" of the date. As we do that, we name the new column. In R, we usually name things before we give it a value. You can't fill a bucket with water until you first have a bucket.
 
 ```{r}
-balt_cols |> 
+balt |> 
   group_by(yr = year(date)) |> 
   summarise(
     avg_high = mean(tmax),
@@ -169,7 +210,7 @@ In this next example, we will jump past the learning and fiddling and just inclu
 We are going to rework our data above a bit, creating a "floor date" instead of year, because it will chart better. We also filter out the incomplete years.
 
 ```{r}
-avg_temps <- balt_cols |> 
+avg_temps <- balt |> 
   mutate(fl_yr = floor_date(date, unit = "year")) |> 
   filter(year(fl_yr) >= 1940, year(fl_yr) <= 2023) |> 
   group_by(fl_yr) |> 
@@ -183,16 +224,27 @@ avg_temps
 
 Now we could chart this with the data above, adding one line at a time.
 
+### Layers of ggplot
+
+The gg in ggplot stands for the Grammar of Graphics, which in short means using words to describing how to build a chart.
+
+In our short time it's hard to put all these pieces together, but I'll explain what is going on below.
+
+1. We start with our data and then pipe into ggplot
+2. The first thing ggplot needs to know is the data (which we piped in), and then aesthetics, which describe which data we map onto the chart and how. In our case here we are placing our fl_yr variable on the x axis. This just sets the canvas and axis lengths.
+3. The "geom's" describe what shape to paint the data onto the canvas. Here we use `geom_line()` and use aesthetics to describe which data (avg_high) to paint based on which axis. We also describe the color.
+4. More of the same with avg_low.
+5. With `labs()` (or labels) we can describe our text labels, like titles, subtitles, captions, etc.
+
+
 ```{r}
-avg_temps |> 
-  ggplot(aes(x = fl_yr)) +
-  geom_line(aes(y = avg_high), color = "red") +
-  geom_line(aes(y = avg_low), color = "blue") +
-  geom_smooth(aes(y = avg_high)) +
-  geom_smooth(aes(y = avg_low)) +
+avg_temps |> # <1>
+  ggplot(aes(x = fl_yr)) + # <2>
+  geom_line(aes(y = avg_high), color = "red") + # <3>
+  geom_line(aes(y = avg_low), color = "blue") + # <4>
   labs(
     title = "Average yearly high and lows: Baltimore"
-  )
+  )  # <5>
 ```
 
 ### Pivoting
@@ -215,7 +267,9 @@ avg_temps_pivot <- avg_temps |>
 avg_temps_pivot
 ```
 
-And then plot:
+And then plot. The difference here is we set our color based on the type of temperature so ggplot automatically splits the line, adds the legend, etc.
+
+We also add a new geom, a smooth line to show trends. And more labs.
 
 ```{r}
 avg_temps_pivot |> 
@@ -231,20 +285,33 @@ avg_temps_pivot |>
   )
 ```
 
+The visualizations file in this lesson has more about building ggplot charts. The [R for Data Science](https://r4ds.hadley.nz/) book is a great resources, as is the [ggplot2 book](https://ggplot2-book.org/index.html). 
+
+## On your own: Year with most snow
+
+We might not have time for this in the class, but if you get a chance to come back, riddle me this:
+
+👉 Which years had the most total snowfall in Baltimore. Chart the top five or ten.
+
+- You first want to build a summary that groups by floor_date by year, then gets the `sum()` of `snow`.
+- Then you can build a chart where x = year and y = total snow. The geom to use is `geom_col()`.
+
 ## Bind rows
 
 When we want to stack similar data frames on top of each other, we can use `bind_rows()`. (There is also bind_cols.)
 
+Here we'll combine weather files from three different cities.
+
 ```{r}
-wx_bind <-  bind_rows(balt, minn, nash)
+wx_bind <-  bind_rows(balt_raw, minn_raw, nash_raw)
 
 # showing we have all three
 wx_bind |> count(name)
 ```
 
-### Recategorize values
+## Recategorize values
 
-We create short city names instead of the long station names, then reselect our most important data.
+We can create short city names instead of the long station names, then reselect our most important data.
 
 ```{r}
 wx_combo <- wx_bind |> 
@@ -272,18 +339,18 @@ Joins adds columns from one data set to another based on matching values in each
 
 ### Inspect the files
 
-In this example we have a dataset the number of students special education for each district, but the file has a code value for the district instead of the name.
+In this example we have a dataset with the number of special education students for each district, but the file has a code value for the district instead of the name.
 
-There is 1200 rows in each of these data sets, but we'll just peek at the first five rows.
+There are about 1200 rows in each of these data sets, but we'll just peek at the first five rows.
 
 ```{r}
-dstud |> slice(1:5)
+dstud_raw |> slice(1:5)
 ```
 
 But we have a reference table that has the district names:
 
 ```{r}
-dref |> slice(1:5)
+dref_raw |> slice(1:5)
 ```
 
 ### Specify the join
@@ -291,12 +358,12 @@ dref |> slice(1:5)
 We can start with the reference data and then "join" the special education counts to it.
 
 ```{r}
-dcombo <- dref |> inner_join(dstud, join_by(district))
+dcombo <- dref_raw |> inner_join(dstud_raw, join_by(district))
 
 dcombo |> slice(1:5)
 ```
 
-Those two data frames would've joined on the `district` variable without specifying them since they are named the same, but it is best to specify your matching columns with [`join_by()`](https://dplyr.tidyverse.org/reference/mutate-joins.html).
+In this case, if we hadn't specified to join on the `district` variable it would've done it anyway since they are named the same, but it is best to specify your matching columns with [`join_by()`](https://dplyr.tidyverse.org/reference/mutate-joins.html).
 
 ### Focus the data
 
@@ -311,8 +378,15 @@ d_sped |> slice(1:5)
 
 ### Filter and plot
 
-We're going to do this in one fell swoop
+We're going to do this in one fell swoop, but I'll give some brief explanations:
 
+- We first build an object with our "local" districts. This allows us to reuse the list and/or edit it easily.
+- Then we take our data and filter it for the local districts, AND THEN ...
+- We pipe right into ggplot. To show the the bars in order of shortest to longest, we have to reorder the x values based on the y values.
+- We set the column geom for the bars
+- We set a goem_text and map the percentage on the chart. We move it a little.
+- We add labels for the title, etc.
+- ylim sets the range of the y axis to the number labels better.
 
 ```{r}
 
