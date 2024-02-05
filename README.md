@@ -52,17 +52,16 @@ At the end of this session participants should be able to do the following:
 ### Libraries
 
 - tidyverse
-- lubridate
-- forcats
+- janitor
 - readxl
-- scales
 
 ### Sample scripts
 
-- R1-1-dplyr-examples.Rmd
+- R2-1-analysis-weather.Rmd
 - R2-2-visualizations.Rmd
-- R2-3-ggplot-examples.Rmd
-
+- R2-3-analysis-denied.Rmd
+- R1-xtra-dplyr-examples.Rmd
+- R2-xtra-ggplot-examples.Rmd
 
 ## R 3: Gathering and cleaning data
 
