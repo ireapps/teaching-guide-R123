@@ -1,5 +1,6 @@
 ---
-title: "R Notebook"
+title: "Example analysis"
+author: "Christian McDonald"
 output:
   html_document:
     df_print: paged
@@ -7,9 +8,17 @@ output:
 
 ## The whole game: Denied
 
-Our goal here is to see how the rate of students in special education has changed over time in Texas. The code below has very light explanation, but you can see more detail in the "Denied" chapters in [Reporting with Data in R](https://utdata.github.io/rwdir/denied-cleaning.html), which follows up on a 2016 story from the Houston Chronicle.
+This is an example of data cleaning, analysis and charting in a single pipeline using an R Notebook, based on a real investigative analysis.
 
-Here we'll import multiple files and stack them, join those with a reference table, do some filtering, summarize some values and then map the result.
+Our goal here is to see how the rate of students in special education has changed over time in Texas. The code below has very light explanation, but you can see more detail in the "Denied" chapters in [Reporting with Data in R](https://utdata.github.io/rwdir/denied-cleaning.html), which follows up on a 2016 series from the Houston Chronicle.
+
+A little background: The Houston Chronicle found that the Texas Education Agency in 2004 "arbitrarily decided what percentage of students should get special education services — 8.5% — and then forced school districts to comply by strictly auditing those serving too many kids."
+
+Following that reporting by the Chronicle and others, the Texas Legislature in 2017 unanimously banned using a target or benchmark on how many students a district or charter school enrolls in special education.
+
+We want to find if the percentage of special education students has changed since that time.
+
+To do this analysis we have to import multiple years of data and bind them, join that with a reference table, do some filtering, summarize some values and then chart the result.
 
 ## Setup
 
@@ -22,8 +31,9 @@ library(tidyverse)
 library(janitor)
 ```
 
-
 ## Importing multiple files at once
+
+While a little more complicated than simply importing a file, we tackle a common challenge: Importing multiple files from a directory.
 
 ### Build a list of files
 
@@ -41,7 +51,7 @@ dstud_files
 
 ### Read and combine
 
-Now we capture the names of the files with `set_names()` and then use map to apply the `read_csv()` function and build a list of data frames from each file. We then use `list_bind()` to put them together.
+Now we capture the names of the files with `set_names()` and then use `map()` to apply the `read_csv()` function to build a list of data frames from each file. We then use `list_bind()` to put them together and `clean_names()` to normalize the variables/column names.
 
 I slice the "head" and "tail" of the combine file to show there is a difference in the `district` column where the `'` was added to ensure the ID is a text value.
 
@@ -80,6 +90,8 @@ Our data does not have district names, but we'll fix that by joining with a refe
 
 ### Import our reference file
 
+As we import this file using `read_csv()` we feed it the argument of `col_select = ` allowing us to select specific files. Somehow you have to know what that list is, so you usually add this after you've imported and inspected the entire file.
+
 ```{r}
 dref_raw <- read_csv(
   "../data/DREF_22.csv",
@@ -108,23 +120,26 @@ dref |> slice(1:5)
 
 ### Join the files together
 
+Here we start with the reference file so those columns are shown first, then do an `inner_join()` to join the student data, using the district column as our key.
+
 ```{r}
 sped_joined <- dref |>
-  inner_join(dstud, by = "district")
+  inner_join(dstud, join_by(district))
 
 sped_joined |> slice(1:5)
 ```
 
 ### Filter and focus
 
-In a choice to focus on traditional public schools, filter out charter and alternative education districts. We then select our main columns of interest while also renaming some of them to be more understandable.
+We filter out alternative education districts and then select our main columns of interest while also renaming some of them to be more understandable.
 
 ```{r}
 sped <- sped_joined |> 
-  filter(dflalted == "N" & dflchart == "N") |> 
+  filter(dflalted == "N") |> 
   select(
     district,
     distname,
+    charter = dflchart,
     cntyname,
     year,
     all_count = dpetallc,
@@ -153,7 +168,7 @@ yearly_percent
 
 ### Plot statewide data
 
-Now we plot that data as a column chart
+Now we plot that data as a column chart.
 
 ```{r}
 yearly_percent |>
@@ -169,18 +184,27 @@ yearly_percent |>
   )
 ```
 
-## Plot local districts
+### Plot local districts
 
-Let's look at some individual districts in the Austin area to make sure the trend tracks. There actually isn't any more data prep do do here ... just filter for districts of interest plot them. We exclude one district that is really a public charter school.
+Let's look at some individual districts in the Austin area to make sure the trend tracks. There isn't any summarization needed to do this ... we just filter our combined data for districts of interest and then plot them.
+
+Filtering here is for display purposes. We exclude one district that is an online-only school that serves students outside the area, and charter schools because there are too many to show effectively on one chart.
 
 ```{r}
 sped |> 
-  filter(cntyname == "TRAVIS" & distname != "UNIVERSITY OF TEXAS AT AUSTIN H S") |> 
+  filter(
+    charter != "Y",
+    cntyname == "TRAVIS",
+    distname != "UNIVERSITY OF TEXAS AT AUSTIN H S"
+  ) |> 
   ggplot(aes(x = year, y = sped_percent, group = distname)) +
   geom_line(aes(color = distname)) +
   labs(
-    title = "Special education rates for Travis County area schools",
-    x = "", y = "% in special education"
-  )
+    title = "Special education rates for Travis County area school districts",
+    x = "", y = "% in special education", color = "Districts"
+  ) +
+  ylim(0,16)
 ```
+
+
 

@@ -1,7 +1,11 @@
 ---
 title: "Data analysis with dplyr"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
+
+> A teaching example from a previous year
 
 If you're familiar with spreadsheets and/or SQL, you'll recognize these functions: they represent the some of the fundamental processes of data analyses in many programs.
 

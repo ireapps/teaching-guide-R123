@@ -4,6 +4,8 @@ author: "Liz Lucas, IRE"
 output:
 ---
 
+> An alternative exploration of ggplot2 examples
+
 ## Setup
 
 The tidyverse library includes most functions, but we'll call the scales library directly later.
