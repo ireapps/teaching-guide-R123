@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/r,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=r,windows,macos
 
+## custom add
+scripts/*.html
+
 ### macOS ###
 # General
 .DS_Store
