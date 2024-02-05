@@ -1,0 +1,100 @@
+---
+title: "R-1-3-analysis-of-mentions"
+author: "Paula Lavigne"
+date: "2024-02-04"
+output:
+  html_document:
+    df_print: paged
+---
+
+In this session, we're going to do some more filtering, grouping and sorting of data, but we're also going to move into making new columns based off running functions on our existing data. And we're going to write our analyzed data to a file that we can share with others.
+
+First off, load the tidyverse, dplyr and readr set of packages.
+
+Run the following code chunk by hitting the green play button in the upper-right corner.
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(readr)
+```
+
+Then we'll load some data. Our data are in a csv file. 
+
+```{r}
+teammentions <- read.csv('../data/teammentions.csv', header = TRUE, sep=",", quote = "\"")
+```
+
+This is a slice of data from a larger dataset of tweets from college athletic department accounts for a story measuring how athletic departments promoted men's teams versus women's teams. 
+
+Each row is an observation. There is no aggregations. In this case, each row represents a mention of a men's or women's team from an athletic department (AD) or team Twitter account. Let's look at the structure.
+
+```{r}
+str(teammentions)
+```
+
+This shows the school, the handle for the account, the designation of whether it's the main AD account or team account, the handle of the team that's mentioned, the sport that mentioned handle represents, a designation of whether the mentioned team was male or female, and the date of the tweet. 
+
+Your goal is to create a spreadsheet you can share with others that shows the name of each school and what percentage of tweets from the main athletic department account are for female teams. (This is out of mentions of all male/female teams and not overall tweets, FWIW.)
+
+Let's do some basic analysis, starting with seeing how often each school's main athletic department account mentions each gendered team.
+
+
+Before we start filtering our data, let's make sure we know what the types are in some of the labeling columns. We use a function called "distinct" to show us the unique values.
+
+```{r}
+teammentions %>% distinct(MENTION_TYPE)
+
+teammentions %>% distinct(TWEETER_TYPE)
+
+```
+
+So we know there are only M/F types of mentions and there are team and AD types of accounts. We need just the AD accounts. 
+
+
+```{r}
+teammentions %>% group_by(SCHOOL, MENTION_TYPE) %>% filter(TWEETER_TYPE == 'AD') %>% summarise(MENTIONS=n())
+```
+
+Now let's look at just the total tweets of teams by athletic department accounts. 
+
+```{r}
+teammentions %>% group_by(SCHOOL) %>% filter(TWEETER_TYPE == 'AD') %>% summarise(MENTIONS=n())
+```
+
+There are a couple ways you could conquer the next few steps. But let's start here by creating a new column in our original data that lists the total M/F mentions for each athletic department account. For that, we're going to use a function called 'mutate.' 
+
+AND we are going to assign this to a new table called MentionsSummary . 
+
+```{r}
+MentionsSummary <- teammentions %>% group_by(SCHOOL) %>% mutate(AllAD_MF = sum(TWEETER_TYPE == 'AD'))
+```
+
+Now if we summarize the mentions by gender like we did above, and include our new column, we'll get something like this. 
+
+This also essentially replaces our existing table with the pared down version. We are passing our existing table through this function to create a new version under the same name. If you're uncertain of your code, you can create a new version under a different name so you don't erroneously replace your table with something you don't want. 
+
+```{r}
+MentionsSummary <- MentionsSummary %>% group_by(SCHOOL, MENTION_TYPE, AllAD_MF) %>% filter(TWEETER_TYPE == 'AD') %>% summarise(MENTIONS=n())
+```
+
+Now we can create a new column that calculates the percent of each set of gendered mentions.
+
+```{r}
+MentionsSummary <- MentionsSummary %>% mutate(PctOfMentions = (MENTIONS/AllAD_MF))
+```
+
+This has the data we want, but it's not how we want to look at it. We want one row for each school showing the total female mentions, total male mentions, total overall mentions, and the percentage for each gender. Basically, you want to take your data from "long" to "wide." And there's a function for this called "pivot_wider()" (and the opposite, "pivot_longer()" of course.
+
+```{r}
+MentionsSummary <- MentionsSummary %>% pivot_wider(names_from = MENTION_TYPE, values_from = c(MENTIONS, PctOfMentions))
+```
+
+And now we'll write this to a .csv file in our directory that we can share with others. Use the name of the table directly after the opening bracket. But you can give the table whatever name you want when you specify it in the directory path. In my example here, 
+
+(Personal preference note: I'm using "row.names=FALSE" in order to prevent the table from including a column with the sequential count of each row. I use this only because if I don't, it creates a slight hiccup distorting the column names when someone else wants to import it into Excel.)  
+
+```{r}
+write.csv(MentionsSummary, '../data/Big10Mentions.csv', row.names=FALSE)
+```
+
