@@ -32,7 +32,7 @@ At the end of this session participants should be able to do the following:
 - R1-1-intro-to-r-and-rstudio.Rmd
 - R1-2-analysis-of-salaries.Rmd
 - R1-3-analysis-of-mentions.Rmd
-- R1-3-analysis-of-babynames.Rmd
+- R1-xtra-analysis-of-babynames.Rmd
 
 ## R 2: Data analysis and plotting
 
@@ -44,9 +44,9 @@ At the end of this session participants should be able to do the following:
 
 At the end of this session participants should be able to do the following:
 
-- Review basic analysis functions - `arrange()`, `filter()`, `select()`, `group_by()`, `summarise()`, `count()`
-- Introduce joins, using at least `left_join()` and `inner_join()`
-- Introduce ggplot2 to make basic plots
+- Apply basic analysis functions - `select()`,`filter()`, `group_by()`, `summarise()`, `arrange()`, `count()`
+- Recognize mutating joins such as `left_join()` and `inner_join()`
+- Recognize the use of ggplot2 to make basic plots
 - Refer to the ggplot2 documentation to determine what geoms they can use in certain situations (one discrete variable, two continuous variables, etc)
 
 ### Libraries
@@ -73,10 +73,10 @@ At the end of this session participants should be able to do the following:
 
 At the end of this session participants should be able to do the following:
 
-- Import both local and remote flat files
 - import Excel and Google Sheets data
 - Import a basic web table, using `read_html() %>% html_table()` from rvest
 - `mutate()`, string functions, lubridate functions, `remove_empty()` from janitor, `distinct()`
+- Import both local and remote flat files
 
 ### Libraries
 
@@ -85,12 +85,15 @@ At the end of this session participants should be able to do the following:
 - googlesheets4
 - rvest
 - lubridate
+- here
+- campfin
 - RSocrata
 
 ### Scripts
 
-- importing-flat-files-R3.Rmd
-- cleaning-examples-R3.Rmd
-- data-cleaning-R3.Rmd
-- getting-and-cleaning-data-R3.Rmd
+- R1-1-evictions.Rmd
+- R3-xtra-cleaning-examples-R3.Rmd
+- R3-xtra-data-cleaning-R3.Rmd
+- R3-xtra-getting-and-cleaning-data-R3.Rmd
+- R3-xtra-importing-flat-files-R3.Rmd
  
