@@ -4,12 +4,7 @@ author: "Liz Lucas, IRE"
 output: 
 ---
 
-## Issues
-
-- Crit can't get googlesheets to work even after authentication
-
 ## Intro
-
 
 First things first: getting your data into R. For a lot of other programs (ahem SQL) this can be a very painful process, but R, and the tidyverse specifically, makes importing a dream. You figure out exactly how to do it and then you can rerun the import script as many times as you need.
 

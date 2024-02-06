@@ -1,0 +1,274 @@
+---
+title: 'Data cleaning: easy scraping, reformatting and reshaping'
+author: "Liz Lucas, IRE & Yanqi Xu"
+output: html_document
+---
+
+Load necessary packages:
+
+```{r}
+library(tidyverse) # we'll be using mostly tidyr and stringr packages within the tidyverse
+library(lubridate) # this package allows us to manipulate dates
+library(here) # easier file paths
+library(readxl) # read and write data from Excel files
+library(googlesheets4) #write to and pull data from Google Sheets
+library(janitor) #data cleaning package - clean_names() is great
+library(campfin) # developed by the Accountability Project to clean campaign finance data but has tons of tools for data cleaning
+library(rvest) #web scraping
+```
+
+
+## Loading html table into R
+
+Let's say a website has the data you need. I wanted to see the percentage of state area with groundwater nitrate contamination and how Nebraska was doing compared to other states. But there's no sort button to view a column in descending order.
+
+```{r}
+epa_url <- "https://www.epa.gov/nutrient-policy-data/estimated-nitrate-concentrations-groundwater-used-drinking"
+
+
+epa_tab <- read_html(epa_url) %>% html_element("table") %>% html_table()
+# Clean up column names
+names(epa_tab) <- c("state","area","percent","private_perc_2005","private_perc_2015")
+
+epa_tab <- epa_tab %>% mutate(across(2:4, str_remove,",|%")) %>% mutate(across(2:4, as.numeric))
+```
+
+ Loading it into R also lets you create a new column to compare % of residents on a private well in 2015 vs 2005.
+ 
+```{r}
+epa_tab <- epa_tab %>% 
+  mutate(perc_change = private_perc_2015-private_perc_2005)
+```
+
+## Data Cleaning
+
+We are going to work with court records from an eviction court in Nebraska. The data was maintained by the administrative office of the courts, provided to the Flatwater Free Press by a researcher who requested it in the first place.
+
+```{r}
+eviction_p1 <- read_xlsx("../data/evictions 2020-01-01 to 2021-01-01.xlsx") %>% clean_names()
+
+eviction_p2 <- read_xlsx("../data/evictions 2019-04-01 to 2019-12-31.xlsx") %>% clean_names()
+
+eviction_p3 <- read_xlsx("../data/evictions 04-01-2017 to 03-31-2019.xlsx") %>% clean_names()
+```
+
+### Combining multiple datasets into one
+
+We can easily combine data files in the same structure with the `bind_rows` command. Note that these data column types need to be consistent, so we can first make sure the date columns are read in as dates. Same with the zipcode columns.
+
+### Converting dates and numbers
+
+To truly work with it as a date, we need it in date format. There is a package called `lubridate` that we imported above that will help you work with dates. We'll take a look at the [lubridate cheatsheet](https://github.com/ireapps/R-for-data-analysis-2022/blob/main/docs/lubridate.pdf) to search for the right function.
+
+It's `ymd()`. When you're going to make a transformation, I recommend 1) testing it out first, and 2) creating a new column with the transformed data.
+
+```{r}
+eviction_p2 <- eviction_p2 %>%  
+  mutate(across(.cols = ends_with("date"), ymd)) %>% 
+  mutate(across(.cols = starts_with("zip"), as.double))
+  
+eviction_p3 <- eviction_p3 %>%  
+  mutate(across(.cols = ends_with("date"), ymd)) %>% 
+  mutate(across(.cols = starts_with("zip"), as.double))
+```
+
+### Binding rows
+
+Now that we've got a working date field,we can combine the data. I always make a new variable when I bind_rows, because if you accidentally overwrite a data frame when appending, you may create duplicate records. 
+
+```{r}
+eviction <- eviction_p1 %>% bind_rows(eviction_p2) %>% bind_rows(eviction_p3) 
+```
+
+Let's create a `file_year` field to show the filing year of 
+
+```{r}
+eviction <- eviction %>% mutate(file_year = year(file_date))
+```
+
+#### String functions
+
+Now the fun begins. We need to isolate plaintiff in the case name and which ones are tied to Omaha Public Authority. 
+
+#### Split up a column
+
+There are two common ways to split up a column, one is to use a `str_extract()` function that extracts the strings before and after a delimiter, which tends to allow more flexibility in designing your own regular expression in case the delimiter pattern is not consistent, or you can use the `separate()` function and separate a column into (generally) 2. 
+
+```{r}
+eviction <- eviction %>% 
+  mutate(caption_up = str_to_upper(eviction$caption), .after = "caption") 
+
+
+eviction <- eviction %>% 
+  #double backlashes "\\" are an escape character, and not a literal character. 
+  mutate(plaintiff = caption_up %>% str_extract("^.+(?=\\sV\\.)") %>% str_trim(),
+    def = caption_up %>% str_extract("(?<=\\sV\\.).+$") %>% str_trim())
+
+# Option 2: use separate()
+eviction <- eviction %>% 
+# always set remove = F so that you don't lose the original column
+  separate(caption_up, into = c("plaintiff","def"), sep = "\\s*V.+", remove = F)
+# this didn't actually work for defendants but this does the job if you only care about the plaintiff
+
+landlord_names <- eviction %>% tabyl(plaintiff)
+```
+
+### Determine if string matches a pattern
+
+We have 5,000+ distinct landlord names. Now we can use a `str_detect` function to capture the ones denoting the Omaha Housing Authority. We don't know what these are, so let's cast a wide net first. 
+
+But let's first narrow the data to everything in Douglas County. We can use the `str_detect` function to tell R to give us all the entries whose `court_name` variable contains the string "Douglas County"
+
+```{r}
+eviction <- eviction %>% 
+  #string goes first before variable name
+  filter(court_name %>% str_detect("Douglas County"))
+```
+
+To match a certain string pattern, we are going to use something called regular expressions, which is "a sequence of characters that specifies a match pattern in text."
+
+This website has a good cheat sheet for regex. https://www.rexegg.com/. I also use [this one](https://regex101.com/) to test if my regex works.
+
+```{r}
+oha <- eviction %>% 
+  mutate(caption = str_to_upper(caption)) %>% 
+  filter(caption %>% str_detect(str_to_upper("Omaha Housing Authority|OHA|Housing Authority|Housing Authority-City of Omaha|Housing Auth. City of Omaha|Housing Authority Of Omaha|Omaha Housing Auth|Housing Auth. City of Omaha|Housing Auhtority City of Omaha|Housing Authority City Omaha|^OMA")))
+
+# every name that seems like OHA
+oha_names <- oha %>% tabyl(plaintiff)
+```
+
+We can manually review the plaintiff names and see if they're truly OHA. 
+Let's check if "THE HOUSING AUTHORITY" is truly OHA cases. By checking the address, we can manually verify these cases. 
+
+When you need to quickly inspect a certain column, use `select` to rearrange column positions for easier viewing.
+
+```{r}
+oha %>% filter(plaintiff == "THE HOUSING AUTHORITY") %>% 
+  #addr1 now shifts to the left and everything else stays in place
+  select(addr1, everything())
+```
+
+```{r}
+oha_names$plaintiff[c(7:13,30:34,59:67)] -> oha_clean_names
+```
+
+```{r}
+#cases we are confident that are filed by OHA 
+actual_oha <- oha %>% filter(plaintiff %in% oha_clean_names)
+# check the ones that are not OHA
+oha_out <- eviction %>% filter(plaintiff %out% oha_names$plaintiff)
+
+oha_out %>% tabyl(plaintiff) -> oha_out_names
+```
+
+Now we have a clean data set of all OHA filings, let's see how many cases they filed each year.
+
+```{r}
+x <- actual_oha %>% count(file_year)
+names(x) <- c("filing_year","oha_cases")
+
+# Let's see how many cases in total are filed each year
+y <- eviction %>% count(file_year)
+
+names(y) <- c("filing_year","all_cases")
+
+z <- x %>% left_join(y)
+
+z <- z %>% mutate(oha_perc = oha_cases/all_cases)
+```
+
+
+## Working with Google Sheets
+
+Say you'd like to send this to another reporter in your newsroom for some spot checks to see if you've gotten everything right. An easy way to do this is connecting to your Google account and upload the sheet to a Google Drive. 
+
+Let's get started. First, you'll need a Google Account and install the `googlesheets4` package. 
+
+Let's create a sheet from scratch. You'll first need to authenticate your account.
+
+```{r}
+googlesheets4::gs4_auth()
+# first argument is the sheet name, second argument is the data frame, which will also be the sheet name
+googlesheets4::gs4_create("oha",sheets = actual_oha)
+```
+
+You can then make changes in the Google sheet. Grab the ID of your sheet. It's in the address url. The string after"https://docs.google.com/spreadsheets/d/" 
+
+Let's add the summary table to the same google sheet inanother tab.
+
+```{r}
+sheet_write(z, ss = "1yyMApNbIVAWxvFPEw_11ZrkRQdip9to_UIs7GL4Op74",sheet = "smmary_table")
+```
+
+## Data reformatting & reshaping
+
+### Adding description columns
+
+Next we'll take a look at `osha`.
+
+```{r}
+osha <- read_csv("../data/osha.csv")
+
+# ore read from github repo
+#osha <- read_csv("https://raw.githubusercontent.com/ireapps/teaching-guide-R123/main/data/osha.csv")
+```
+
+
+```{r}
+glimpse(osha)
+```
+
+If you look through the [documentation](https://www.osha.gov/sites/default/files/ITA_Data_Dictionary.pdf) for this dataset, you'll notice that some of these fields are coded, such as `size` and `establishment_type`. For columns that have many value options, we might want to join to a lookup table. But for just a few values, we can add a `_desc` column into our data and code in values based on the original column.
+
+We'll add an `estab_type_desc` column based on the values in `establishment_type`, using a function called `case_when()`. This is something like an `if` or `ifelse` statement:
+
+```{r}
+# test it out
+osha %>% mutate(estab_type_desc = case_when(
+  establishment_type==1 ~ "Not a Government Entity",
+  establishment_type==2 ~ "State Government Entity",
+  establishment_type==3 ~ "Local Government Entity",
+  TRUE ~ "Error"
+)) %>% 
+  count(establishment_type, estab_type_desc)
+
+# make it permanent
+osha <- osha %>% mutate(estab_type_desc = case_when(
+  establishment_type==1 ~ "Not a Government Entity",
+  establishment_type==2 ~ "State Government Entity",
+  establishment_type==3 ~ "Local Government Entity",
+  TRUE ~ "Error"
+))
+```
+
+### Reshaping data structure
+
+This is the original file that from the Census Bureau. 
+
+```{r}
+poverty <- read_csv("../data/poverty_original.csv")
+
+#poverty <- read_csv("https://raw.githubusercontent.com/ireapps/teaching-guide-R123/main/data/poverty_original.csv")
+```
+
+
+In this example, each variable (i.e. `below50`, `below125`, etc) is its own row. To make it easier to do calculations by county, I transposed this data so that each variable would be its own column rather than row. I did that using `pivot_wider()` (for the sake of this example, I'm going to exclude the margin of error, or `moe`).
+
+```{r}
+poverty %>% 
+  select(-moe) %>% 
+  pivot_wider(names_from=variable, values_from=estimate)
+```
+
+There is a function called `pivot_longer()` that does the opposite:
+
+```{r}
+# First I'll create a new variable with the wider data:
+poverty_wide <- poverty %>% 
+  select(-moe) %>% 
+  pivot_wider(names_from=variable, values_from=estimate)
+
+# Then I'll turn it back to long using pivot_longer()
+poverty_wide %>% pivot_longer(cols = population:below500, names_to="variable", values_to="estimate")
+```
