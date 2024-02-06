@@ -91,7 +91,7 @@ At the end of this session participants should be able to do the following:
 
 ### Scripts
 
-- R1-1-evictions.Rmd
+- R1-1-cleaning-evictions.Rmd
 - R3-xtra-cleaning-examples-R3.Rmd
 - R3-xtra-data-cleaning-R3.Rmd
 - R3-xtra-getting-and-cleaning-data-R3.Rmd
